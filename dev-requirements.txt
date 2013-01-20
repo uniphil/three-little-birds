@@ -4,3 +4,5 @@ dj-database-url==0.2.1
 gunicorn==0.17.2
 newrelic==1.9.0.21
 wsgiref==0.1.2
+django-storages==1.1.6 # remove?
+s3boto.S3BotoStorage # remove?

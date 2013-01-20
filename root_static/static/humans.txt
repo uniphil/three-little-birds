@@ -26,5 +26,6 @@
     Django, sqlite3 locally; postgres production
     Gunicorn
     Heroku, GitHub -> https://github.com/uniphil/three-little-birds
+    Amazon S3
     NewRelic
     SublimeText 2
