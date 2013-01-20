@@ -1,10 +1,9 @@
 # Django settings for tlb project.
 import os
 import dj_database_url
-envget = os.environ.get
 local_path = lambda *p: os.path.join(os.getcwd(), *p)
 
-DEBUG = bool(envget('DEBUG', True))
+DEBUG = bool(os.environ.get('DEBUG', True))
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -75,7 +74,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = envget('SECRET_KEY', '123456')
+SECRET_KEY = os.environ.get('SECRET_KEY', '123456')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
