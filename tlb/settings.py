@@ -114,6 +114,7 @@ INSTALLED_APPS = (
     # 3rd-party
     'gunicorn',
     'storages',
+    'south',
     # custom apps
     'root_static',
     'pages',

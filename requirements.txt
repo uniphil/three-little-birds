@@ -7,3 +7,4 @@ dj-database-url==0.2.0
 newrelic==1.9.0.21
 django-storages==1.1.6
 boto==2.7.0
+South==0.7.6
