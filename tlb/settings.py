@@ -112,6 +112,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 3rd-party
+    'gunicorn',
     # custom apps
     'root_static',
     'flat',
