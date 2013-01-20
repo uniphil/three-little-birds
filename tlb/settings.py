@@ -116,7 +116,7 @@ INSTALLED_APPS = (
     'gunicorn',
     # custom apps
     'root_static',
-    'flat',
+    'pages',
     # admin
     'django.contrib.admin',
 )
