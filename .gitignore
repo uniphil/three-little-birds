@@ -4,3 +4,4 @@
 *~
 venv/
 static-collected/
+dev-data.sqlite3
