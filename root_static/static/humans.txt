@@ -1,0 +1,30 @@
+# TEAM
+
+    Philip Schleihauf - Developer - @unicyclephil
+    Chris Plosaj - Designer - chrisp.ideas@gmail.com
+
+
+# BAND
+
+    Erin Saoirse Adair
+    Amelia Leclair
+    Angela Schleihauf
+
+
+# THANKS
+
+    world
+
+
+# TECHNOLOGY COLOPHON
+
+    HTML5, CSS3
+    HTML5Doctor Reset CSS
+    Some ideas from H5BP
+    jQuery
+    CoffeeScript
+    Django, sqlite3 locally; postgres production
+    Gunicorn
+    Heroku, GitHub -> https://github.com/uniphil/three-little-birds
+    NewRelic
+    SublimeText 2
