@@ -4,4 +4,5 @@
 *~
 venv/
 static-collected/
+uploads/
 dev-data.sqlite3
