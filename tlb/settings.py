@@ -114,7 +114,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # 3rd-party
     'gunicorn',
-    #'storages',
+    #'storages', # added next
     'south',
     'compressor',
     # custom apps
@@ -130,6 +130,9 @@ if not DEBUG:
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
     AWS_STORAGE_BUCKET_NAME = 'three-little-birds'
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    COMPRESS_URL = "http://compressor-test.s3.amazonaws.com/"
+    COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATIC_URL = COMPRESS_URL
 
 
 # A sample logging configuration. The only tangible logging
