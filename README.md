@@ -26,8 +26,11 @@ back to jiaaro
 add /app/bin to PATH (via config:add)
 add /app/lib/python2.7/site-packages to PYTHONPATH
 
-default PATH is 
-default PYTHONPATH is
+default PATH is /app/.heroku/python/bin:/usr/local/bin:/usr/bin:/bin
+default PYTHONPATH is /app/
+
+jiaaro PATH is 
+jiaaro PYTHONPATH is
 
 new PATH is /usr/local/bin:/usr/bin:/bin:/app/bin
 new PYTHONPATH is /app/lib/python2.7/site-packages
