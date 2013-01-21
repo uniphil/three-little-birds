@@ -130,7 +130,7 @@ if not DEBUG:
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
     AWS_STORAGE_BUCKET_NAME = 'three-little-birds'
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    COMPRESS_URL = "http://compressor-test.s3.amazonaws.com/"
+    COMPRESS_URL = "http://three-little-birds.s3.amazonaws.com/"
     COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     STATIC_URL = MEDIA_URL = COMPRESS_URL
 
