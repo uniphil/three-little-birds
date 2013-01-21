@@ -16,5 +16,5 @@ Use a custom buildpack so we can use lessc and coffeescript:
 heroku config:add BUILDPACK_URL=git://github.com/jiaaro/heroku-buildpack-django.git
 ```
 so far the custom buildpack is not working...
-
+... switched back to heroku's
 
