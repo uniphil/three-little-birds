@@ -1,0 +1,38 @@
+<!doctype html>{% load static compress %}
+<html class="no-js">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+        <title>{{ window.title|default:"Three Little Birds" }}</title>
+
+        <meta name="description" content="Three Little Birds is a fusion of three distinct women who candidly sing their minds on social and political issues. Drawing upon a variety of musical influences their songs combine everything from Balkan styled harmonies within reggae beats to country-flavoured melodies amidst Tin-Pan Era arrangements." />
+        <meta name="viewport" content="width=device-width" />
+
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="author" type="text/plain" href="/humans.txt" />
+        {% compress css %}
+            <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}" />
+            <link rel="stylesheet" type="text/less" href="{% static 'less/main.less' %}" />
+        {% endcompress %}
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        {% block page %}{% endblock %}
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery.min.js' %}"><\/script>')</script>
+        {% compress js %}
+            <script type="text/coffeescript" src="{% static 'coffee/main.coffee' %}"></script>
+        {% endcompress %}
+        <script>
+            var _gaq=[['_setAccount','UA-1110199-20'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

@@ -8,3 +8,5 @@ newrelic==1.9.0.21
 django-storages==1.1.6
 boto==2.7.0
 South==0.7.6
+django-appconf==0.5
+django-compressor==1.2

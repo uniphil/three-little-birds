@@ -71,6 +71,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -113,8 +114,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # 3rd-party
     'gunicorn',
-    'storages',
+    #'storages',
     'south',
+    'compressor',
     # custom apps
     'root_static',
     'pages',
@@ -151,7 +153,14 @@ LOGGING = {
     }
 }
 
+"""
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+"""
+
+COMPRESS_PRECOMPILERS = (
+    ('text/coffeescript', 'coffee --compile --stdio'),
+    ('text/less', 'lessc {infile} {outfile}'),
+)

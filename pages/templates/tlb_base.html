@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block page %}
+    <div id="paper-bg">
+        <div id="container">
+            <section id="header">
+                {% block header %}
+                    <header>
+                        {% block title %}
+                            <h1>Three Little Birds</h1>
+                        {% endblock %}
+                    </header>
+                    <nav>
+                        {% block nav %}
+                            <ul>
+                                <li><a href="#">Bio</a></li>
+                                <li><a href="#">Gallery</a></li>
+                                <li><a href="#">Media</a></li>
+                                <li><a href="#">Store</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                            <div class="clear"></div>
+                        {% endblock %}
+                    </nav>
+                {% endblock %}
+            </section>
+            
+            <section id="content">
+                {% block content %}
+                    <p>this template should be extended :)</p>
+                {% endblock %}
+            </section>
+
+            <section id="footer">
+                <footer>
+                    {% block footer %}
+                        <p>copyright 2012 All rights reserved.</p>
+                    {% endblock %}
+                </footer>
+            </section>
+        </div>
+    </div>
+{% endblock %}
