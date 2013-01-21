@@ -123,6 +123,14 @@ INSTALLED_APPS = (
     # admin
     'django.contrib.admin',
 )
+if not DEBUG:
+    INSTALLED_APPS = INSTALLED_APPS + ('storages',)
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+    AWS_STORAGE_BUCKET_NAME = 'three-little-birds'
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -153,12 +161,6 @@ LOGGING = {
     }
 }
 
-"""
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-"""
 
 COMPRESS_PRECOMPILERS = (
     ('text/coffeescript', 'coffee --compile --stdio'),
