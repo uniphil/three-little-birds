@@ -132,7 +132,7 @@ if not DEBUG:
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     COMPRESS_URL = "http://compressor-test.s3.amazonaws.com/"
     COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-    STATIC_URL = COMPRESS_URL
+    STATIC_URL = MEDIA_URL = COMPRESS_URL
 
 
 # A sample logging configuration. The only tangible logging
