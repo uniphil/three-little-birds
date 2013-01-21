@@ -1,1 +1,39 @@
 {% extends 'tlb_base.html' %}
+
+{% block content %}
+<div id="home">
+
+    <article id="feature">
+        <h1>{{ feature.title|default:"Missing Content :(" }}</h1>
+        {% if feature.img %}
+            <img
+                src="{{ feature.img.src }}"
+                alt="{{ feature.img.alt }}"
+                title="{{ feature.img.title }}"
+            />
+        {% endif %}
+        {{ feature.content|linebreaks }}
+        {% if feature.more %}
+            <p class="read-more">
+                see
+                <a
+                    href="{{ feature.more.href }}"
+                    title="Full story here: {{ feature.more.title }}"
+                >
+                    {{ feature.more.title }}
+                </a>
+            </p>
+        {% endif %}
+    </article>
+
+    <section id="extra">
+        <div id="music-player">
+        </div>
+        <div id="poster">
+        </div>
+        <div id="social">
+        </div>
+    </section>
+
+</div>
+{% endblock %}

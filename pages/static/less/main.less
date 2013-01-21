@@ -22,6 +22,15 @@ a {
     text-decoration: none;
 }
 
+#content h1 {
+    font-size: 10 * @u;
+    text-transform: uppercase;
+}
+
+.clear {
+    clear: both;
+}
+
 //div, section, header, footer { outline: 1px dotted rgba(0,0,0,0.3); }
 
 
@@ -70,13 +79,18 @@ a {
 }
 
 
+#home #feature {
+    width: (2 * @column) + @gutter;
+
+    img {
+        width: (2 * @column) + @gutter;
+    }
+}
+
+
 #footer footer {
     border-top: @hr-thick solid black;
     margin-top: 5 * @u;
     padding: (5 * @u) 0;
     text-align: center;
-}
-
-.clear {
-    clear: both;
 }
