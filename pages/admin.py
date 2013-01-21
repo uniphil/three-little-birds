@@ -1,4 +1,4 @@
-from pages.models import Photo
+from pages.models import Feature
 from django.contrib import admin
 
-admin.site.register(Photo)
+admin.site.register(Feature)

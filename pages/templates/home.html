@@ -5,9 +5,9 @@
 
     <article id="feature">
         <h1>{{ feature.title|default:"Missing Content :(" }}</h1>
-        {% if feature.img %}
+        {% if feature.img.src %}
             <img
-                src="{{ feature.img.src }}"
+                src="{{ MEDIA_URL }}{{ feature.img.src }}"
                 alt="{{ feature.img.alt }}"
                 title="{{ feature.img.title }}"
             />
