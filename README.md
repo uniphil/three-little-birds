@@ -32,5 +32,5 @@ default PYTHONPATH is /app/
 jiaaro PATH is /usr/local/bin:/usr/bin:/bin
 jiaaro PYTHONPATH is nothing
 
-new PATH is back to default
-new PYTHONPATH is back to default
+new PATH is /app/bin:/app/.heroku/python/bin:/usr/local/bin:/usr/bin:/bin
+new PYTHONPATH is /app:/app/lib/python2.7/site-packages:/app/lib/python2.7:/app/lib
