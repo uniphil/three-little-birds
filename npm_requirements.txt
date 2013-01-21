@@ -1,1 +1,2 @@
-lessc
+coffee-script
+less@1.0.0
