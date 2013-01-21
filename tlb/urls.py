@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from tlb import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -14,3 +15,8 @@ urlpatterns = patterns('',
     url(r'^[\w\d\s\-\._]+\.txt$', 'root_static.views.txt'),
     url(r'^[\w\d\s\-\._]+\.png$', 'root_static.views.png'),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
+    )
