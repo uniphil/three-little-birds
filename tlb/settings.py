@@ -3,7 +3,7 @@ import os
 import dj_database_url
 local_path = lambda *p: os.path.join(os.getcwd(), *p)
 
-DEBUG = (os.environ.get('DEBUG') != 'False')
+DEBUG = True #(os.environ.get('DEBUG') != 'False')
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
