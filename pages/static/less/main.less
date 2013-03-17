@@ -48,11 +48,28 @@ a {
     border: @u solid black;
     border-width: (7 * @u) 0;  // 28px
     h1 {
+        height: 23 * @u;
+        position: relative;
         text-transform: uppercase;
         font-size: 16 * @u;
         text-align: center;
         white-space: nowrap;
         color: @tlb-red;
+    }
+    h1:before,
+    h1:after {
+        content: "";
+        position: absolute;
+        height: 92px;
+        width: 156px;
+    }
+    h1:before {
+        left: 0;
+        background: url('../../img/boilerplate/header-bird.png') no-repeat 0;
+    }
+    h1:after {
+        right: 0;
+        background: url('../../img/boilerplate/header-est.png') no-repeat 100%;
     }
 }
 

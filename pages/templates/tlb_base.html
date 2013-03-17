@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}{% load static %}
 
 {% block page %}
     <div id="paper-bg">
@@ -7,7 +7,7 @@
                 {% block header %}
                     <header>
                         {% block title %}
-                            <h1>Three Little Birds</h1>
+                            <h1><img src="{% static 'img/boilerplate/header-tlb.png' %}" alt="Three Little Birds" title="Three Little Birds" /></h1>
                         {% endblock %}
                     </header>
                     <nav>
