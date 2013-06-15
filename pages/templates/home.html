@@ -4,7 +4,7 @@
 <div id="home">
 
     <article id="feature">
-        <h1>{{ feature.title|default:"Missing Content :(" }}</h1>
+        <h1><span>{{ feature.title|default:"Missing Content :(" }}</span></h1>
         {% if feature.img.src %}
             <img
                 src="{{ MEDIA_URL }}{{ feature.img.src }}"
@@ -18,8 +18,7 @@
                 see
                 <a
                     href="{{ feature.more.href }}"
-                    title="Full story here: {{ feature.more.title }}"
-                >
+                    title="Full story here: {{ feature.more.title }}">
                     {{ feature.more.title }}
                 </a>
             </p>
@@ -28,12 +27,27 @@
 
     <section id="extra">
         <div id="music-player">
+            {{ player.name }}
+            <div class="player-seek">
+            </div>
+            <div class="player-controls">
+                <a href="#" class="player-pause">pause</a>
+                <a href="#" class="player-stop">stop</a>
+                <a href="#" class="player-play">play</a>
+                <a href="#" class="player-prev">previous</a>
+                <a href="#" class="player-next">next</a>
+                <div class="player-volume"></div>
+            </div>
         </div>
         <div id="poster">
         </div>
         <div id="social">
+            facebook
+            myspace
+            twitter
         </div>
     </section>
 
+    <div class="clearfix"></div>
 </div>
 {% endblock %}
