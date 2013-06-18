@@ -41,3 +41,14 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Player Control';
+    src: url('../fonts/PlayerControl/Player-Control.eot');
+    src: url('../fonts/PlayerControl/Player-Control.eot') format('embedded-opentype'),
+         url('../fonts/PlayerControl/Player-Control.woff') format('woff'),
+         url('../fonts/PlayerControl/Player-Control.ttf') format('truetype'),
+         url('../fonts/PlayerControl/Player-Control.svg#blah') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

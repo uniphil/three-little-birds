@@ -4,7 +4,7 @@
 <div id="home">
 
     <article id="feature">
-        <h1><span>{{ feature.title|default:"Missing Content :(" }}</span></h1>
+        <h1>{{ feature.title|default:"Missing Content :(" }}</h1>
         {% if feature.img.src %}
             <img
                 src="{{ MEDIA_URL }}{{ feature.img.src }}"
@@ -26,19 +26,22 @@
     </article>
 
     <section id="extra">
-        <div id="music-player">
-            {{ player.name }}
-            <div class="player-seek">
+        {% if track %}
+            <div id="music-player">
+                <h2 class="track-name">{{ track.name }}</h2>
+                <div class="download">
+                    Download:
+                    <ul class="formats">
+                        {% for format in track.formats %}
+                            <li>
+                                <a href="{{ MEDIA_URL }}{{ format.url }}">{{ format.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <a href="/media">More media</a>
+                </div>
             </div>
-            <div class="player-controls">
-                <a href="#" class="player-pause">pause</a>
-                <a href="#" class="player-stop">stop</a>
-                <a href="#" class="player-play">play</a>
-                <a href="#" class="player-prev">previous</a>
-                <a href="#" class="player-next">next</a>
-                <div class="player-volume"></div>
-            </div>
-        </div>
+        {% endif %}
         <div id="poster">
         </div>
         <div id="social">

@@ -1,6 +1,7 @@
 @import 'bp.less';
 
 @paper-colour: #e6e0d6;
+@black: #000;
 @tlb-red: #d94430;
 
 @u: 4px;
@@ -48,7 +49,7 @@ a {
 
 
 #header header {
-    border: @u solid black;
+    border: @u solid @black;
     border-width: (7 * @u) 0;  // 28px
     h1 {
         height: 23 * @u;
@@ -80,7 +81,7 @@ a {
     margin: (5 * @u) 0;
     padding: (2 * @u) 0 @u;
     line-height: 1em;
-    border: @u solid black;
+    border: @u solid @black;
     border-width: @hr-thick 0;
 
     ul {
@@ -95,7 +96,7 @@ a {
                 // display: inline-block;
                 // padding: 0 (6 * @u);
                 font-size: 4 * @u;
-                // border: @u solid black;
+                // border: @u solid @black;
                 // border-width: 0 @hr-thick 0 0;
                 text-transform: uppercase;
 
@@ -120,18 +121,12 @@ a {
 
     h1 {
         font-size: (8 * @u);
-        // background: rgba(100, 0, 0, 0.2);
         font-family: 'Serial Publication';
-
-        // &:before {
-        //     content: "";
-        //     display: block;
-        //     width: 100%;
-        //     background: rgba(0, 0, 100, 0.2);
-        // }
     }
+
     img {
         width: (2 * @column) + @gutter;
+        margin: (2 * @u) 0 (5 * @u);
     }
 
     .read-more {
@@ -150,9 +145,55 @@ a {
     float: right;
 }
 
+#music-player {
+    margin: (@u * 2) 0 (@u * 4);
+    padding: (@u / 2);
+    outline: 2px solid @black;
+
+    .track-name {
+        font-size: (@u * 8);
+        font-family: 'Muncie';
+        text-align: center;
+    }
+
+    .no-js {
+        li {
+            margin-left: 1em;
+        }
+        a {
+            font-weight: bold;
+        }
+    }
+}
+.js #music-player {
+    .download {
+        display: none;
+    }
+
+    .controls {
+        .playnav {
+            display: block;
+            float: left;
+            padding: 0 (@u);
+            font-family: 'Player Control';
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+
+            font-size: (@u * 4);
+            letter-spacing: (@u * 4);
+            color: @black;
+        }
+    }
+}
+
 
 #footer footer {
-    border-top: @hr-thick solid black;
+    border-top: @hr-thick solid @black;
     margin: 5 * @u 0;
     padding: (5 * @u) 0;
 
