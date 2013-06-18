@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'FuckingRegular';
+    src: url('fucking.eot');
+    src: url('fucking.eot') format('embedded-opentype'),
+         url('fucking.woff') format('woff'),
+         url('fucking.ttf') format('truetype'),
+         url('fucking.svg#FuckingRegular') format('svg');
+}

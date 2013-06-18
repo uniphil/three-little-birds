@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'MinionProRegular';
+    src: url('minionpro-regular.eot');
+    src: url('minionpro-regular.eot') format('embedded-opentype'),
+         url('minionpro-regular.woff') format('woff'),
+         url('minionpro-regular.ttf') format('truetype'),
+         url('minionpro-regular.svg#MinionProRegular') format('svg');
+}

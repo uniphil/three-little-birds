@@ -10,34 +10,13 @@
 @page-width: (3 * @column) + (2 * @gutter);
 @hr-thick: @u / 2;
 
-@font-face {
-    font-family: 'Muncie';
-    src: url('../../fonts/Muncie/Muncie.eot');
-    src: url('../../fonts/Muncie/Muncie.eot') format('embedded-opentype'),
-         url('../../fonts/Muncie/Muncie.woff') format('woff'),
-         url('../../fonts/Muncie/Muncie.ttf') format('truetype'),
-         url('../../fonts/Muncie/Muncie.svg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Serial Publication';
-    src: url('../../fonts/SerialPublication/SerialPublication.eot');
-    src: url('../../fonts/SerialPublication/SerialPublication.eot') format('embedded-opentype'),
-         url('../../fonts/SerialPublication/SerialPublication.woff') format('woff'),
-         url('../../fonts/SerialPublication/SerialPublication.ttf') format('truetype'),
-         url('../../fonts/SerialPublication/SerialPublication.svg') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
 html {
     font-size: @u;
 }
 
 body {
     font-size: 4 * @u;
+    font-family: 'Minion';
     background: @paper-colour url('../../img/boilerplate/paper.jpg') 50%;
 }
 
@@ -106,13 +85,16 @@ a {
 
     ul {
         text-align: center;
-        word-spacing: 1em;
+        word-spacing: 8px;
         li {
             display: inline;
+            font-family: 'Fucking';
+            letter-spacing: 2px;
+
             a {
                 // display: inline-block;
                 // padding: 0 (6 * @u);
-                font-size: 6 * @u;
+                font-size: 4 * @u;
                 // border: @u solid black;
                 // border-width: 0 @hr-thick 0 0;
                 text-transform: uppercase;

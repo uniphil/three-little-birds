@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'Muncie';
+    src: url('../fonts/Muncie/Muncie.eot');
+    src: url('../fonts/Muncie/Muncie.eot') format('embedded-opentype'),
+         url('../fonts/Muncie/Muncie.woff') format('woff'),
+         url('../fonts/Muncie/Muncie.ttf') format('truetype'),
+         url('../fonts/Muncie/Muncie.svg#blah') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Serial Publication';
+    src: url('../fonts/SerialPublication/SerialPublication.eot');
+    src: url('../fonts/SerialPublication/SerialPublication.eot') format('embedded-opentype'),
+         url('../fonts/SerialPublication/SerialPublication.woff') format('woff'),
+         url('../fonts/SerialPublication/SerialPublication.ttf') format('truetype'),
+         url('../fonts/SerialPublication/SerialPublication.svg#blah') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Fucking';
+    src: url('../fonts/Fucking/fucking.eot');
+    src: url('../fonts/Fucking/fucking.eot') format('embedded-opentype'),
+         url('../fonts/Fucking/fucking.woff') format('woff'),
+         url('../fonts/Fucking/fucking.ttf') format('truetype'),
+         url('../fonts/Fucking/fucking.svg#blah') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Minion';
+    src: url('../fonts/Minion/minionpro-regular.eot');
+    src: url('../fonts/Minion/minionpro-regular.eot') format('embedded-opentype'),
+         url('../fonts/Minion/minionpro-regular.woff') format('woff'),
+         url('../fonts/Minion/minionpro-regular.ttf') format('truetype'),
+         url('../fonts/Minion/minionpro-regular.svg#blah') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
