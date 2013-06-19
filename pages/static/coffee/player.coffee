@@ -92,7 +92,7 @@ $ ->
     if player_box.length  # exists?
 
         soundManager.setup
-            url: SM2SWFPath,  # path to soundmanager2.swf
+            url: '/soundmanager2.swf',  # path to soundmanager2.swf
             onready: ->
                 track_url = get_playable player_box
                 if not track_url

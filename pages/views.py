@@ -58,6 +58,13 @@ def home(request):
         context_instance=RequestContext(request, context))
 
 
+def sm2(request):
+    import os
+    swf_path = os.path.join('pages', 'static', 'swf', 'soundmanager2.swf')
+    swf = open(swf_path)
+    return HttpResponse(swf, content_type='application/x-shockwave-flash')
+
+
 def crossdomain(request):
     policy = """<?xml version="1.0"?>
 <!DOCTYPE cross-domain-policy SYSTEM "http://www.adobe.com/xml/dtds/cross-domain-policy.dtd">
@@ -65,14 +72,14 @@ def crossdomain(request):
     <!-- Read this: www.adobe.com/devnet/articles/crossdomain_policy_file_spec.html -->
 
     <!-- Most restrictive policy: -->
-    <!--
     <site-control permitted-cross-domain-policies="none"/>
-    -->
 
     <!-- Least restrictive policy: -->
+    <!--
     <site-control permitted-cross-domain-policies="all"/>
     <allow-access-from domain="*" to-ports="*" secure="false"/>
     <allow-http-request-headers-from domain="*" headers="*" secure="false"/>
+    -->
 </cross-domain-policy>
 """
     return HttpResponse(policy, content_type='application/xml')
