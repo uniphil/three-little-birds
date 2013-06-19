@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'pages.views.home', name='home'),
     # url(r'^tlb/', include('tlb.foo.urls')),
+    url(r'^crossdomain.xml$', 'pages.views.crossdomain', name='xdomain'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^[\w\d\s\-\._]+\.txt$', 'root_static.views.txt'),
