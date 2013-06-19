@@ -7,9 +7,14 @@
 @u: 4px;
 
 @column: 72 * @u;
-@gutter: 12 * @u;
+@gutter: 10 * @u;
 @page-width: (3 * @column) + (2 * @gutter);
 @hr-thick: @u / 2;
+
+@slider-width: (@u * 3 / 4);
+@slider-thin: (@u / 4);
+@slider-handle: (@u * 3);
+
 
 html {
     font-size: @u;
@@ -24,6 +29,10 @@ body {
 a {
     color: inherit;
     text-decoration: none;
+
+    &:hover {
+
+    }
 }
 
 #content h1 {
@@ -131,7 +140,7 @@ a {
 
     .read-more {
         text-align: right;
-        margin: 1em 0;
+        margin: (@u * 2) 0;
         font-style: italic;
 
         a {
@@ -146,9 +155,9 @@ a {
 }
 
 #music-player {
-    margin: (@u * 2) 0 (@u * 4);
+    margin: (@u * 2) 0;
     padding: (@u / 2);
-    outline: 2px solid @black;
+    border: 2px solid @black;
 
     .track-name {
         font-size: (@u * 8);
@@ -166,15 +175,46 @@ a {
     }
 }
 .js #music-player {
+
     .download {
         display: none;
     }
 
+    .ui-slider {
+        height: @slider-thin;
+        width: 100%;
+        background: @black;
+    }
+    .ui-slider-range {
+        height: @slider-width;
+        background: @black;
+        position: relative;
+        top: (-@slider-thin);
+    }
+    .ui-slider-handle {
+        display: block;
+        outline: none;
+        position: absolute;
+        top: 0;
+        width: @slider-handle;
+        height: @slider-handle;
+        border-radius: @slider-handle;
+        margin: (-@slider-handle / 2) 0 0 (-@slider-handle / 2);
+        background: @black;
+        cursor: default;
+    }
+
     .controls {
+
+        .progress {
+            position: relative;
+            margin: (@u) (@u) (@u * 4);
+        }
+
         .playnav {
             display: block;
             float: left;
-            padding: 0 (@u);
+            padding: 0 0 (@u * 2) (@u);
             font-family: 'Player Control';
             speak: none;
             font-style: normal;
@@ -188,7 +228,38 @@ a {
             letter-spacing: (@u * 4);
             color: @black;
         }
+
+        .volume {
+            position: relative;
+            float: right;
+            width: (@column - @u * 50);
+            margin: 0.4em (@u * 2) 0 0;
+            .ui-slider {
+                height: @slider-width;
+            }
+            .ui-slider-range {
+                top: 0;
+            }
+            .ui-slider-handle {
+                top: 1px;
+            }
+        }
     }
+}
+
+
+#poster {
+    margin: (@u * 6) 0;
+    img {
+        width: @column;
+    }
+}
+
+
+#social {
+    margin: (@u * 6) 0;
+    padding: (@u * 4);
+    border: 2px solid @black;
 }
 
 

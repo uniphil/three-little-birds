@@ -44,7 +44,8 @@
             var SM2SWFPath = "{% static 'swf/soundmanager2.swf' %}";
         </script>
         {% compress js %}
-            <script type="text/javascript" src="{% static 'js/sm2/soundmanager2.js' %}"></script>"
+            <script type="text/javascript" src="{% static 'js/sm2/soundmanager2.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/jquery-ui.slider.min.js' %}"></script>
             <script type="text/coffeescript" src="{% static 'coffee/player.coffee' %}"></script>
         {% endcompress %}
         <script>

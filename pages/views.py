@@ -47,9 +47,12 @@ def home(request):
             'url': db_track.wav
         })
 
+    db_poster = Poster.objects.get(featured=True)
+
     context = {
         'feature': feature,
         'track': track,
+        'poster': db_poster,
     }
     return render_to_response('home.html',
         context_instance=RequestContext(request, context))

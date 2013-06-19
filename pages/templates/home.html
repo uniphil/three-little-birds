@@ -42,8 +42,13 @@
                 </div>
             </div>
         {% endif %}
-        <div id="poster">
-        </div>
+        {% if poster %}
+            <div id="poster">
+                {% if poster.link_to %}<a href="{{ poster.link_to }}">{% endif %}
+                <img src="{{ MEDIA_URL }}{{ poster.photo }}" alt="{{ poster.alt_text }}" title="{{ poster.tooltip }}" />
+                {% if poster.link_to %}</a>{% endif %}
+            </div>
+        {% endif %}
         <div id="social">
             facebook
             myspace

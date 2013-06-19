@@ -10,9 +10,24 @@ show_downloads = (container) ->
 
 Player = (container) ->
 
+    this.current_name = $(container).find 'track-name'
+
     controls = $ '<div class="controls"></div>'
 
-    progress = $ '<div class="progress">progress</div>'
+    progress = $ '<div class="progress"></div>'
+
+    this.seek = $ '<div></div>'
+    this.seek.slider
+        range: "min",
+        min: -2,
+        max: 102,
+        value: 0,
+        slide: (e, ui) =>
+            sound = this.current_track
+            new_pos = ui.value * sound.duration / 100
+            soundManager.setPosition sound.id, new_pos
+
+    progress.append this.seek
 
     playnav = $ '<div class="playnav"></div>'
 
@@ -29,24 +44,37 @@ Player = (container) ->
     this.add_nav_button "prev", "Previous", "↞"
     this.add_nav_button "next", "Next", "↠"
 
-    playnav.append '<div class="clearfix"></div>'
+    volume = $ '<div class="volume"></div>'
 
-    volume = $ '<div class="volume">volume</div>'
+    vol_slide = $ '<div></div>'
+    vol_slide.slider
+        range: "min",
+        min: 0,
+        max: 100,
+        value: 72,
+        slide: (e, ui) =>
+            soundManager.setVolume this.current_track.id, ui.value
+
+    volume.append vol_slide
 
     controls.append progress
     controls.append playnav
     controls.append volume
 
     container.append controls
+    container.append '<div class="clearfix"></div>'
 
-    this.load = (url) ->
+    this.load = (url) =>
         this.current_track = soundManager.createSound
             id: 'mainsound',
             url: url,
             autoLoad: true,
             autoPlay: false,
-            onload: ->
-                console.log 'loaded the track! '
+            whileplaying: ((player)->
+                return ->
+                    percent = this.position / this.duration * 100
+                    player.seek.slider 'value', percent
+            ) this
 
     this.nav = (action) ->
         sound = this.current_track
@@ -58,7 +86,6 @@ Player = (container) ->
     return this
 
 
-
 $ ->
     player_box = $ "#music-player"
 
@@ -67,7 +94,6 @@ $ ->
         soundManager.setup
             url: SM2SWFPath,  # path to soundmanager2.swf
             onready: ->
-                console.log 'rrrrrerady'
                 track_url = get_playable player_box
                 if not track_url
                     show_downloads player_box
