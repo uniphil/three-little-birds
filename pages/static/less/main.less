@@ -15,6 +15,15 @@
 @slider-thin: (@u / 4);
 @slider-handle: (@u * 3);
 
+@soc-fb: 0;
+@soc-ms: 1;
+@soc-tw: 2;
+@soc-big-x: 80px;
+@soc-big-y: 104px;
+@soc-small-x: 31px;
+@soc-small-y: 43px;
+@soc-small-y-off: (@soc-big-y * 3);
+
 
 html {
     font-size: @u;
@@ -256,10 +265,29 @@ a {
 }
 
 
+.social-shortcuts {
+    a {
+        display: inline-block;
+        background: url('../../img/social-sprite.png') 0 0 no-repeat;
+        font-size: 0;
+        color: rgba(0, 0, 0, 0);
+    }
+}
+
 #social {
     margin: (@u * 6) 0;
     padding: (@u * 4);
     border: 2px solid @black;
+    text-align: center;
+
+    a {
+        width: @soc-big-x;
+        height: @soc-big-y;
+
+        &.facebook { background-position: 0 -(@soc-big-y * @soc-fb); }
+        &.myspace { background-position: 0 -(@soc-big-y * @soc-ms); }
+        &.twitter { background-position: 0 -(@soc-big-y * @soc-tw); }
+    }
 }
 
 
@@ -273,5 +301,22 @@ a {
     }
     .social-shortcuts {
         float: right;
+
+        a {
+            width: @soc-small-x;
+            height: @soc-small-y;
+            margin-top: (-@u * 2);
+            vertical-align: middle;
+
+            &.facebook {
+                background-position: 0 -(@soc-small-y-off + @soc-small-y * @soc-fb);
+            }
+            &.myspace {
+                background-position: 0 -(@soc-small-y-off + @soc-small-y * @soc-ms);
+            }
+            &.twitter {
+                background-position: 0 -(@soc-small-y-off + @soc-small-y * @soc-tw);
+            }
+        }
     }
 }
