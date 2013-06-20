@@ -10,3 +10,4 @@ boto==2.7.0
 South==0.7.6
 django-appconf==0.5
 django-compressor==1.2
+Markdown==2.3.1
