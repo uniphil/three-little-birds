@@ -18,10 +18,10 @@
 @soc-fb: 0;
 @soc-ms: 1;
 @soc-tw: 2;
-@soc-big-x: 80px;
-@soc-big-y: 104px;
-@soc-small-x: 31px;
-@soc-small-y: 43px;
+@soc-big-x: 65px;
+@soc-big-y: 86px;
+@soc-small-x: 26px;
+@soc-small-y: 35px;
 @soc-small-y-off: (@soc-big-y * 3);
 
 
@@ -44,6 +44,15 @@ a {
     }
 }
 
+p {
+    line-height: 1.2em;
+}
+
+.stretch--resizer,
+.stretch--handle {
+    line-height: 1em;
+}
+
 #content h1 {
     font-size: 10 * @u;
     text-transform: uppercase;
@@ -55,9 +64,6 @@ a {
 .clear {
     clear: both;
 }
-
-//div, section, header, footer { outline: 1px dotted rgba(0,0,0,0.3); }
-
 
 #container {
     width: @page-width;
@@ -96,7 +102,7 @@ a {
 }
 
 #header nav {
-    margin: (5 * @u) 0;
+    margin: (5 * @u) 0 (7 * @u);
     padding: (2 * @u) 0 @u;
     line-height: 1em;
     border: @u solid @black;
@@ -120,6 +126,10 @@ a {
 
                 &:after {
                     content: " | ";
+                }
+
+                &.selected {
+                    font-weight: bold;
                 }
             }
             &:first-child a {
@@ -164,7 +174,6 @@ a {
 }
 
 #music-player {
-    margin: (@u * 2) 0;
     padding: (@u / 2);
     border: 2px solid @black;
 
@@ -268,6 +277,7 @@ a {
 .social-shortcuts {
     a {
         display: inline-block;
+        vertical-align: middle;
         background: url('../../img/social-sprite.png') 0 0 no-repeat;
         font-size: 0;
         color: rgba(0, 0, 0, 0);
@@ -279,6 +289,7 @@ a {
     padding: (@u * 4);
     border: 2px solid @black;
     text-align: center;
+    letter-spacing: (@u * 4);
 
     a {
         width: @soc-big-x;
@@ -287,6 +298,134 @@ a {
         &.facebook { background-position: 0 -(@soc-big-y * @soc-fb); }
         &.myspace { background-position: 0 -(@soc-big-y * @soc-ms); }
         &.twitter { background-position: 0 -(@soc-big-y * @soc-tw); }
+    }
+}
+
+
+#bio {
+    h1 {
+        margin: 0 0 -(@u * 4) 0;
+        font-family: 'Serial Publication';
+    }
+    h2 {
+        font-size: 1em;
+        font-weight: bold;
+        color: @tlb-red;
+    }
+    p {
+        margin: 1em 0;
+        &:first-child { margin-top: 0; }
+    }
+
+    .col-1 {
+        float: left;
+        width: @column;
+
+        img.ad {
+            width: @column;
+        }
+    }
+
+    .cols-23 {
+        float: right;
+        width: (@column * 2 + @gutter);
+
+        img.photo {
+            width: (@column * 2 + @gutter);
+            margin: 0 0 @gutter 0;
+        }
+    }
+
+    .float-col {
+        width: @column;
+        &.left { float: left; }
+        &.right { float: right; }
+    }
+
+    .float-col.right {
+        p {
+            margin: 0.333em 0;
+            line-height: 1.1em;
+        }
+    }
+
+    .discography {
+        margin-top: 1.5em;
+    }
+}
+
+
+#contact {
+    h1 {
+        font-family: 'Serial Publication';
+        margin-bottom: -(@u);
+    }
+
+    input,
+    textarea,
+    button {
+        margin: 0.5em 0;
+        padding: 1em 1.5em 0.5em;
+        box-sizing: border-box;
+        font-family: inherit;
+    }
+    input,
+    textarea {
+        background: none;
+        background: transparent;
+        border: 2px solid @black;
+    }
+    input {
+        width: @column;
+    }
+    textarea {
+        width: (@column * 2 + @gutter);
+        height: (@gutter * 6);
+    }
+    button {
+        margin: 0.333em 0 2em;
+        padding-left: 2em;
+        padding-right: 2em;
+        float: right;
+        border: none;
+        border-radius: 0;
+        color: white;
+        background: @black;
+    }
+
+    .cols-12 {
+        width: (@column * 2 + @gutter);
+        float: left;
+    }
+
+    .col-1 {
+        width: @column;
+        float: left;
+    }
+    .col-2 {
+        width: @column;
+        float: right;
+        margin: (@u * 12) 0 0;
+        padding: (@u * 4);
+        text-align: right;
+        letter-spacing: (@u * 4);
+
+        a {
+            width: @soc-big-x;
+            height: @soc-big-y;
+
+            &.facebook { background-position: 0 -(@soc-big-y * @soc-fb); }
+            &.myspace { background-position: 0 -(@soc-big-y * @soc-ms); }
+            &.twitter { background-position: 0 -(@soc-big-y * @soc-tw); }
+        }
+    }
+    .col-3 {
+        width: @column;
+        float: right;
+
+        img.ad {
+            width: @column;
+        }
     }
 }
 
@@ -301,12 +440,12 @@ a {
     }
     .social-shortcuts {
         float: right;
+        letter-spacing: (@u * 2);
 
         a {
             width: @soc-small-x;
             height: @soc-small-y;
             margin-top: (-@u * 2);
-            vertical-align: middle;
 
             &.facebook {
                 background-position: 0 -(@soc-small-y-off + @soc-small-y * @soc-fb);

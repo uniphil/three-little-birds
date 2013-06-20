@@ -1,0 +1,45 @@
+{% extends 'tlb_base.html' %}
+
+{% block content %}
+<article id="bio">
+
+    <div class="col-1">
+        <h1>{{ bio.title }}</h1>
+        {{ bio.content1|linebreaks }}
+
+        <img
+            src="{{ MEDIA_URL }}{{ bio.ad }}"
+            alt="An old silly ad for hats."
+            title="Get yr hats!!"
+            class="ad"
+        />
+    </div>
+
+    <div class="cols-23">
+        <img
+            src="{{ MEDIA_URL }}{{ bio.photo }}"
+            alt="The Three Little Birds being Three Silly Little Birds"
+            title="Three Silly Birds"
+            class="photo"
+        />
+
+        <div class="float-col left">
+            {{ bio.content2|linebreaks }}
+        </div>
+        <div class="float-col right">
+            <div class="instrumentation">
+                <h2>Instrumentation</h2>
+                {{ bio.instrumentation|linebreaks }}
+            </div>
+            <div class="discography">
+                <h2>Discography</h2>
+                {{ bio.discography|linebreaks }}
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="clearfix"></div>
+</article>
+{% endblock %}

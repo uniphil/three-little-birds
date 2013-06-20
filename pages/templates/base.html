@@ -37,7 +37,8 @@
                 },
                 fontactive: function(fontname) {
                     if (fontname === 'Serial Publication') {
-                        $('#home #feature h1').contents().stretch({min: 3, max: 300});
+                        $('#home #feature h1, #bio h1, #contact h1')
+                            .contents().stretch({min: 3, max: 300});
                     }
                 }
             });

@@ -7,17 +7,22 @@
                 {% block header %}
                     <header>
                         {% block title %}
-                            <h1><img src="{% static 'img/boilerplate/header-tlb.png' %}" alt="Three Little Birds" title="Three Little Birds" /></h1>
+                            <a href="{% url home %}" title="Home">
+                                <h1><img src="{% static 'img/boilerplate/header-tlb.png' %}" alt="Three Little Birds" title="Three Little Birds" /></h1>
+                            </a>
                         {% endblock %}
                     </header>
                     <nav>
-                        {% block nav %}
+                        {% block navigation %}
                             <ul>
-                                <li><a href="#">Bio</a></li>
-                                <li><a href="#">Gallery</a></li>
-                                <li><a href="#">Media</a></li>
-                                <li><a href="#">Store</a></li>
-                                <li><a href="#">Contact</a></li>
+                                {% for page in nav %}
+                                    <li>
+                                        <a href="/{{ page.1 }}"
+                                            class="{% if page.2 %}selected{% endif %}">
+                                            {{ page.0 }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
                             </ul>
                         {% endblock %}
                     </nav>

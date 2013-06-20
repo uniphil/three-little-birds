@@ -1,61 +1,78 @@
 from django.http import HttpResponse
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
-from pages.models import Feature, Track, Poster
+from pages.models import Feature, Poster, Track, Biography
+from functools import wraps
 
 
-def home(request):
-    db_feature = Feature.objects.get(featured=True)
-    feature = {
-        'title': db_feature.title,
-        'img': {
-            'src': db_feature.photo,
-            'alt': db_feature.photo_alt,
-            'title': db_feature.photo_title,
-        },
-        'content': db_feature.content,
-    }
-    if db_feature.more_link:
-        feature['more'] = {
-            'href': db_feature.more_link,
-            'title': db_feature.more_title,
-        }
+def selectable(func):
+    nav_links = (
+        ('Bio', 'bio'),
+        ('Gallery', 'gallery'),
+        ('Media', 'media'),
+        ('Store', 'store'),
+        ('Contact', 'contact'),
+    )
+    nav = [(n, l, True if l == func.__name__ else False) for n, l in nav_links]
+    print nav
 
-    db_track = Track.objects.get(featured=True)
-    track = {
-        'name': db_track.name,
-        'formats': []
-    }
-    if db_track.mp3:
-        track['formats'].append({
-            'name': 'mp3',
-            'url': db_track.mp3
-        })
-    if db_track.ogg:
-        track['formats'].append({
-            'name': 'ogg vorbis',
-            'url': db_track.ogg
-        })
-    if db_track.flac:
-        track['formats'].append({
-            'name': 'lossless flacc',
-            'url': db_track.flac
-        })
-    if db_track.wav:
-        track['formats'].append({
-            'name': 'uncompressed wav',
-            'url': db_track.wav
-        })
+    @wraps(func)
+    def with_nav(*args, **kwargs):
+        return func(nav, *args, **kwargs)
 
-    db_poster = Poster.objects.get(featured=True)
+    return with_nav
 
-    context = {
+
+@selectable
+def home(nav, request):
+    print nav
+    feature = Feature.objects.get(featured=True).inflate()
+    track = Track.objects.get(featured=True).inflate()
+    poster = Poster.objects.get(featured=True)
+    context = RequestContext(request, {
+        'nav': nav,
         'feature': feature,
         'track': track,
-        'poster': db_poster,
-    }
-    return render_to_response('home.html',
-        context_instance=RequestContext(request, context))
+        'poster': poster,
+    })
+    return render_to_response('home.html', context)
+
+
+@selectable
+def bio(nav, request):
+    print nav
+    bio = Biography.objects.get()
+    context = RequestContext(request, {
+        'nav': nav,
+        'bio': bio
+    })
+    return render_to_response('bio.html', context)
+
+
+@selectable
+def gallery(nav, request):
+    return HttpResponse('blah')
+
+
+@selectable
+def media(nav, request):
+    return HttpResponse('blah')
+
+
+@selectable
+def store(nav, request):
+    return HttpResponse('blah')
+
+
+@selectable
+def contact(nav, request):
+    context = RequestContext(request, {
+        'nav': nav,
+    })
+    return render_to_response('contact.html', context)
+
+
+## stupid stuff
 
 
 def sm2(request):

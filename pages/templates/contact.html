@@ -1,0 +1,43 @@
+{% extends 'tlb_base.html' %}
+{% load static %}
+
+{% block content %}
+<div id="contact">
+
+    <div class="cols-12">
+        <form method="post" action="{% url contact %}">
+            <div class="col-1">
+                <h1>Contact Us</h1>
+                <p>
+                    Send us a message and we'll get back to you soon!<br/>
+                    You can also contact us at <a href="mailto:person@example.com">us@example.com</a>
+                </p>
+                <label for="name" class="visuallyhidden">Name</label>
+                <input type="text" id="name" name="name" placeholder="Name" />
+                <label for="email" class="visuallyhidden">Email</label>
+                <input type="text" id="email" name="email" placeholder="Email Address" />
+            </div>
+            <div class="col-2">
+                <span class="social-shortcuts">
+                    <a href="https://www.facebook.com/threelittlebirdstheband" title="facebook" class="facebook">facebook</a>
+                    <a href="https://myspace.com/threelittlebirdstheband" title="myspace" class="myspace">myspace</a>
+                    <a href="https://twitter.com/TLBtheband" title="twitter" class="twitter">twitter</a>
+                </span>
+            </div>
+            <div class="clearfix"></div>
+            <textarea>Message...</textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <div class="col-3">
+        <img
+            src="{% static 'img/contact-ad.png' %}"
+            alt="cheeky bedspread ad"
+            title="take a rest"
+            class="ad"
+        />
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+{% endblock %}
