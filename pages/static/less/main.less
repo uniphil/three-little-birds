@@ -1,3 +1,7 @@
+// IMPORTANT: if any page dimensions are changed, besure to update the image 
+// resizing stuff in models.py.
+
+
 @import 'bp.less';
 
 @paper-colour: #e6e0d6;
@@ -139,6 +143,8 @@ li {
 
                 &.selected {
                     font-weight: bold;
+                    font-weight: 900;
+                    letter-spacing: 0px;
                 }
             }
             &:first-child a {
@@ -354,6 +360,25 @@ li {
 
     .discography {
         margin-top: 1.5em;
+    }
+}
+
+
+#gallery {
+    ul,
+    li {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    ul {
+        margin: -(@gutter / 2);
+    }
+    li {
+        float: left;
+        width: @column;
+        height: @column;
+        margin: (@gutter / 2);
     }
 }
 

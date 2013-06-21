@@ -1,4 +1,12 @@
 from django.db import models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit, SmartResize, Adjust
+
+
+# these numbers come from main.less
+ONE_COL = 288
+TWO_COL = 616
+TRE_COL = 944
 
 
 class Feature(models.Model):
@@ -101,4 +109,28 @@ class Biography(models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+class GalleryPhoto(models.Model):
+    """Photos in the gallery"""
+
+    photo = models.FileField(upload_to='three-little-birds/gallery',
+                             blank=False)
+    web = ImageSpecField(source='photo',
+                         processors=[ResizeToFit(TRE_COL)],
+                         format='JPEG',
+                         options={'quality': 91})
+    thumbnail = ImageSpecField(source='photo',
+                               processors=[
+                                    Adjust(color=0.25),
+                                    SmartResize(288, 288),
+                               ],
+                               format='JPEG',
+                               options={'quality': 78})
+    caption = models.TextField()
+    weight = models.IntegerField(default=0, blank=False)
+
+    def __unicode__(self):
+        return 'photo: {}'.format(self.caption[:21])
+
 

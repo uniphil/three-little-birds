@@ -2,6 +2,21 @@
 
 {% block content %}
 <div id="gallery" class="standard">
-    <h1 class="stretch">Coming Soon...</h1>
+    <ul>
+        {% for photo in gallery %}
+            <li>
+                <a href="{% url galleryphoto photo_id=photo.pk %}">
+                    <img
+                        src="{{ photo.thumbnail.url }}"
+                        width="{{ photo.thumbnail.width }}"
+                        height="{{ photo.thumbnail.height }}"
+                        alt="{{ photo.caption }}"
+                        title="{{ photo.caption }}"
+                    />
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    <div class="clearfix"></div>
 </div>
 {% endblock %}

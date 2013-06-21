@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     #'storages', # added next
     'south',
     'compressor',
+    'imagekit',
     # custom apps
     'root_static',
     'pages',

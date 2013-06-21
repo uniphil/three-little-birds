@@ -2,31 +2,38 @@ from functools import wraps
 # from markdown import markdown
 from django.http import HttpResponse
 from django.template.context import RequestContext
-from django.shortcuts import render_to_response
-from pages.models import Feature, Poster, Track, Biography
+from django.shortcuts import get_object_or_404, render_to_response
+from pages.models import Feature, Poster, Track, Biography, GalleryPhoto
 
 
-def selectable(func):
-    nav_links = (
-        ('Bio', 'bio'),
-        ('Gallery', 'gallery'),
-        ('Media', 'media'),
-        ('Store', 'store'),
-        ('Contact', 'contact'),
-    )
-    nav = [(n, l, True if l == func.__name__ else False) for n, l in nav_links]
-    print nav
+NAV = (
+    ('Bio', 'bio'),
+    ('Gallery', 'gallery'),
+    ('Media', 'media'),
+    ('Store', 'store'),
+    ('Contact', 'contact'),
+)
 
-    @wraps(func)
-    def with_nav(*args, **kwargs):
-        return func(nav, *args, **kwargs)
 
-    return with_nav
+def selectable(select):
+    nav_select = lambda s: [(n, l, True if l == s else False) for n, l in NAV]
+
+    def wrap_with_nav(nav, func):
+        @wraps(func)
+        def with_nav(*args, **kwargs):
+            return func(nav, *args, **kwargs)
+        return with_nav
+
+    if isinstance(select, str):
+        nav = nav_select(select)
+        return lambda func: wrap_with_nav(nav, func)
+    else:
+        nav = nav_select(select.__name__)
+        return wrap_with_nav(nav, select)
 
 
 @selectable
 def home(nav, request):
-    print nav
     feature = Feature.objects.get(featured=True).inflate()
     track = Track.objects.get(featured=True).inflate()
     poster = Poster.objects.get(featured=True)
@@ -41,7 +48,6 @@ def home(nav, request):
 
 @selectable
 def bio(nav, request):
-    print nav
     bio = Biography.objects.get()
     context = RequestContext(request, {
         'nav': nav,
@@ -52,16 +58,26 @@ def bio(nav, request):
 
 @selectable
 def gallery(nav, request):
-    print nav
+    gallery = GalleryPhoto.objects.all()
     context = RequestContext(request, {
+        'gallery': gallery,
         'nav': nav,
     })
     return render_to_response('gallery.html', context)
 
 
+@selectable(select='gallery')
+def galleryphoto(nav, request, photo_id):
+    photo = get_object_or_404(GalleryPhoto, pk=photo_id)
+    context = RequestContext(request, {
+        'photo': photo,
+        'nav': nav,
+    })
+    return render_to_response('gallery_photo.html', context)
+
+
 @selectable
 def media(nav, request):
-    print nav
     context = RequestContext(request, {
         'nav': nav,
     })
@@ -70,7 +86,6 @@ def media(nav, request):
 
 @selectable
 def store(nav, request):
-    print nav
     context = RequestContext(request, {
         'nav': nav,
     })

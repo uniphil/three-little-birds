@@ -1,0 +1,14 @@
+{% extends 'tlb_base.html' %}
+
+{% block content %}
+<div id="gallery-photo" class="standard">
+    <img
+        src="{{ photo.web.url }}"
+        width="{{ photo.web.width }}"
+        height="{{ photo.web.height }}"
+        alt="{{ photo.caption }}"
+        title="{{ photo.caption }}"
+    />
+    {{ photo.caption|linebreaks }}
+</div>
+{% endblock %}
