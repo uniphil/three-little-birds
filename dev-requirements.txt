@@ -1,11 +1,13 @@
+BeautifulSoup==3.2.1
 Django==1.4.3
+Markdown==2.3.1
+South==0.7.6
 argparse==1.2.1
 dj-database-url==0.2.1
-gunicorn==0.17.2
-newrelic==1.9.0.21
-wsgiref==0.1.2
-django-storages==1.1.6 # remove?
-s3boto.S3BotoStorage # remove?
-South==0.7.6
 django-appconf==0.5
 django-compressor==1.2
+django-imagekit==3.0.1
+gunicorn==0.17.4
+lxml==3.2.1
+pilkit==0.3.0
+wsgiref==0.1.2
