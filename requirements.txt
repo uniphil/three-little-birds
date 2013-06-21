@@ -2,12 +2,14 @@ Django==1.4.3
 argparse==1.2.1
 gunicorn==0.17.2
 wsgiref==0.1.2
+newrelic==1.9.0.21
 psycopg2==2.4.5
 dj-database-url==0.2.0
-newrelic==1.9.0.21
 django-storages==1.1.6
 boto==2.7.0
 South==0.7.6
 django-appconf==0.5
 django-compressor==1.2
 Markdown==2.3.1
+django-imagekit==3.0.1
+pilkit==0.3.0
