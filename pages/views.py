@@ -1,8 +1,9 @@
+from functools import wraps
+# from markdown import markdown
 from django.http import HttpResponse
 from django.template.context import RequestContext
 from django.shortcuts import render_to_response
 from pages.models import Feature, Poster, Track, Biography
-from functools import wraps
 
 
 def selectable(func):
@@ -44,24 +45,36 @@ def bio(nav, request):
     bio = Biography.objects.get()
     context = RequestContext(request, {
         'nav': nav,
-        'bio': bio
+        'bio': bio,
     })
     return render_to_response('bio.html', context)
 
 
 @selectable
 def gallery(nav, request):
-    return HttpResponse('blah')
+    print nav
+    context = RequestContext(request, {
+        'nav': nav,
+    })
+    return render_to_response('gallery.html', context)
 
 
 @selectable
 def media(nav, request):
-    return HttpResponse('blah')
+    print nav
+    context = RequestContext(request, {
+        'nav': nav,
+    })
+    return render_to_response('media.html', context)
 
 
 @selectable
 def store(nav, request):
-    return HttpResponse('blah')
+    print nav
+    context = RequestContext(request, {
+        'nav': nav,
+    })
+    return render_to_response('store.html', context)
 
 
 @selectable

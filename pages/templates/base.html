@@ -1,5 +1,5 @@
 <!doctype html>{% load static compress %}
-<html class="no-js">
+<html lang="en-gb" class="no-js">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -28,6 +28,7 @@
             <script type="text/javascript" src="{% static 'js/webfont.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/jquery.stretch.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/hyphenator.js' %}"></script>
         {% endcompress %}
         <script>
             WebFont.load({
@@ -37,8 +38,10 @@
                 },
                 fontactive: function(fontname) {
                     if (fontname === 'Serial Publication') {
-                        $('#home #feature h1, #bio h1, #contact h1')
-                            .contents().stretch({min: 3, max: 300});
+                        $('.stretch').contents().stretch({min: 3, max: 300});
+                    } else if (fontname === 'Minion') {
+                        to_hyphenate = $('.column-text').addClass('hyphenate');
+                        Hyphenator.run();
                     }
                 }
             });

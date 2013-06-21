@@ -116,7 +116,7 @@ $.fn.stretch = function(opts) {
 $.fn.stretch.defaults = {
     min: 0,
     max: 0,
-    maxSpacing: 0
+    maxSpacing: 10
 };
     
 })(jQuery);

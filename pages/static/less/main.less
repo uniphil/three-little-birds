@@ -48,12 +48,21 @@ p {
     line-height: 1.2em;
 }
 
+strong {
+    font-weight: bold;
+}
+
+li {
+    margin-left: 1em;
+}
+
 .stretch--resizer,
 .stretch--handle {
     line-height: 1em;
 }
 
 #content h1 {
+    font-family: 'Serial Publication';
     font-size: 10 * @u;
     text-transform: uppercase;
     &.dont-shout {
@@ -146,11 +155,6 @@ p {
 #home #feature {
     width: (2 * @column) + @gutter;
     float: left;
-
-    h1 {
-        font-size: (8 * @u);
-        font-family: 'Serial Publication';
-    }
 
     img {
         width: (2 * @column) + @gutter;
@@ -305,7 +309,6 @@ p {
 #bio {
     h1 {
         margin: 0 0 -(@u * 4) 0;
-        font-family: 'Serial Publication';
     }
     h2 {
         font-size: 1em;
@@ -344,8 +347,8 @@ p {
 
     .float-col.right {
         p {
-            margin: 0.333em 0;
-            line-height: 1.1em;
+            margin: 0.667em 0;
+            line-height: 1.2em;
         }
     }
 
@@ -357,7 +360,6 @@ p {
 
 #contact {
     h1 {
-        font-family: 'Serial Publication';
         margin-bottom: -(@u);
     }
 

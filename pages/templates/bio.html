@@ -1,10 +1,11 @@
 {% extends 'tlb_base.html' %}
+{% load markup %}
 
 {% block content %}
-<article id="bio">
+<article id="bio" class="standard">
 
-    <div class="col-1">
-        <h1>{{ bio.title }}</h1>
+    <div class="col-1 column-text">
+        <h1 class="stretch">{{ bio.title }}</h1>
         {{ bio.content1|linebreaks }}
 
         <img
@@ -23,17 +24,17 @@
             class="photo"
         />
 
-        <div class="float-col left">
+        <div class="float-col left column-text">
             {{ bio.content2|linebreaks }}
         </div>
         <div class="float-col right">
             <div class="instrumentation">
                 <h2>Instrumentation</h2>
-                {{ bio.instrumentation|linebreaks }}
+                {{ bio.instrumentation|markdown }}
             </div>
             <div class="discography">
                 <h2>Discography</h2>
-                {{ bio.discography|linebreaks }}
+                {{ bio.discography|markdown }}
             </div>
         </div>
 

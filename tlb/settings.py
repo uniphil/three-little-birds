@@ -112,6 +112,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.markup',
     # 3rd-party
     'gunicorn',
     #'storages', # added next
