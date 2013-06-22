@@ -124,6 +124,10 @@ def contact(nav, request):
             print mailgun_response
             print mailgun_response.text
 
+            if mailgun_response.status_code == 401:
+                return HttpResponse('baaaaad 401 ' + mailgun_response.text)
+            elif mailgun_response.status_code != 200:
+                return HttpResponse('still bad, {} {}'.format(mailgun_response.status_code, mailgun_response.text))
             return HttpResponseRedirect('/message-sent')
     else:
         form = ContactForm()
