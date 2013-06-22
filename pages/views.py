@@ -117,7 +117,7 @@ def contact(nav, request):
             import os, requests
             print 'stuff imported, posting...'
             mailgun_response = requests.post(
-                "https://api.mailgun.net/v2/threelittlebirds.herouapp.com/messages",
+                "https://api.mailgun.net/v2/threelittlebirds.herokuapp.com/messages",
                 auth=('api', os.environ.get('MAILGUN_API_KEY')),
                 data=data,
             )
