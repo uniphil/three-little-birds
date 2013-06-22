@@ -95,9 +95,12 @@ def store(nav, request):
 
 @selectable
 def contact(nav, request):
+    print 'got request for contact form'
     if request.method == 'POST':
+        print 'it was posted'
         form = ContactForm(request.POST)
         if form.is_valid():
+            print 'it is valid'
             name = form.cleaned_data['name']
             sender = form.cleaned_data['email'],
             data = {
@@ -109,14 +112,15 @@ def contact(nav, request):
             if form.cleaned_data['cc']:
                 data['cc'] = sender
 
+            print 'got all the bits, sending...'
             # SEND THAT SHIT
             import os, requests
+            print 'stuff imported, posting...'
             mailgun_response = requests.post(
                 "https://api.mailgun.net/v2/threelittlebirds.herouapp.com/messages",
                 auth=('api', os.environ.get('MAILGUN_API_KEY')),
                 data=data,
             )
-
             print mailgun_response
             print mailgun_response.text
 
