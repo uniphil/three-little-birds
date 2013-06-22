@@ -14,3 +14,4 @@ Markdown==2.3.1
 django-imagekit==3.0.1
 pilkit==0.3.0
 requests==1.2.3
+PIL==1.1.7
