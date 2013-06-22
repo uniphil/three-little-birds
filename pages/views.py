@@ -112,7 +112,7 @@ def contact(nav, request):
             # SEND THAT SHIT
             import os, requests
             mailgun_response = requests.post(
-                "https://api.mailgun.net/v2/mailgun.net/messages",
+                "https://api.mailgun.net/v2/threelittlebirds.herouapp.com/messages",
                 auth=('api', os.environ.get('MAILGUN_API_KEY')),
                 data=data,
             )
