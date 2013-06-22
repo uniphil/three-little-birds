@@ -17,10 +17,7 @@
                             <ul>
                                 {% for page in nav %}
                                     <li>
-                                        <a href="/{{ page.1 }}"
-                                            class="{% if page.2 %}selected{% endif %}">
-                                            {{ page.0 }}
-                                        </a>
+                                        <a href="/{{ page.1 }}" class="{% if page.2 %}selected{% endif %}">{{ page.0 }}</a>
                                     </li>
                                 {% endfor %}
                             </ul>
