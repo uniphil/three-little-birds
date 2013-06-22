@@ -6,6 +6,7 @@
 
     <div class="cols-12">
         <form method="post" action="{% url contact %}">
+            {% csrf_token %}
             <div class="col-1">
                 <h1 class="stretch">Contact Us</h1>
                 <p>
@@ -13,11 +14,17 @@
                     You can also contact us at <a href="mailto:person@example.com">us@example.com</a>
                 </p>
                 <label for="name" class="visuallyhidden">Name</label>
-                <input type="text" id="name" name="name" placeholder="Name" />
-                <label for="email" class="visuallyhidden">Email</label>
-                <input type="text" id="email" name="email" placeholder="Email Address" />
+                {{ form.name.errors }}
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    value="{{ form.data.name }}"
+                    tabindex="1"
+                />
             </div>
-            <div class="col-2">
+            <div class="col-2 social">
                 <span class="social-shortcuts">
                     <a href="https://www.facebook.com/threelittlebirdstheband" title="facebook" class="facebook">facebook</a>
                     <a href="https://myspace.com/threelittlebirdstheband" title="myspace" class="myspace">myspace</a>
@@ -25,7 +32,38 @@
                 </span>
             </div>
             <div class="clearfix"></div>
-            <textarea>Message...</textarea>
+
+            <div class="col-1">
+                <label for="email" class="visuallyhidden">Email</label>
+                {{ form.email.errors }}
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email Address"
+                    value="{{ form.data.email }}"
+                    reqired="required"
+                    tabindex="2"
+                />
+            </div>
+            <div class="col-2 cc-float">
+                <input
+                    type="checkbox"
+                    id="cc"
+                    name="cc"
+                    tabindex="3"
+                />
+                <label for="cc">Send me a carbon copy</label>
+            </div>
+            <div class="clearfix"></div>
+
+            {{ form.message.errors }}
+            <textarea
+                id="message"
+                name="message"
+                placeholder="Message..."
+                tabindex="4"
+            >{{ form.data.message }}</textarea>
             <button type="submit">Send</button>
         </form>
     </div>

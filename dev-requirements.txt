@@ -11,3 +11,4 @@ gunicorn==0.17.4
 lxml==3.2.1
 pilkit==0.3.0
 wsgiref==0.1.2
+requests==1.2.3

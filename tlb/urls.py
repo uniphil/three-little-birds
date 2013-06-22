@@ -34,7 +34,9 @@ urlpatterns = patterns('',
     url(r'^contact$',
         'pages.views.contact',
         name='contact'),
-
+    url(r'^message-sent$',
+        'pages.views.sent',
+        name='sent'),
 
     # url(r'^tlb/', include('tlb.foo.urls')),
     url(r'^soundmanager2.swf', 'pages.views.sm2', name='sm2'),

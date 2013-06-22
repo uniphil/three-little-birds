@@ -400,7 +400,14 @@ li {
     textarea {
         background: none;
         background: transparent;
+        background: rgba(255, 255, 255, 0.1);
         border: 2px solid @black;
+        border-color: rgba(0, 0, 0, 0.8);
+
+        &:focus {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: @black;
+        }
     }
     input {
         width: @column;
@@ -432,18 +439,31 @@ li {
     .col-2 {
         width: @column;
         float: right;
-        margin: (@u * 12) 0 0;
-        padding: (@u * 4);
-        text-align: right;
-        letter-spacing: (@u * 4);
 
-        a {
-            width: @soc-big-x;
-            height: @soc-big-y;
+        &.social {
+            margin: (@u * 12) 0 0;
+            padding: (@u * 4) 0;
+            text-align: right;
+            letter-spacing: (@u * 4);
 
-            &.facebook { background-position: 0 -(@soc-big-y * @soc-fb); }
-            &.myspace { background-position: 0 -(@soc-big-y * @soc-ms); }
-            &.twitter { background-position: 0 -(@soc-big-y * @soc-tw); }
+            a {
+                width: @soc-big-x;
+                height: @soc-big-y;
+
+                &.facebook { background-position: 0 -(@soc-big-y * @soc-fb); }
+                &.myspace { background-position: 0 -(@soc-big-y * @soc-ms); }
+                &.twitter { background-position: 0 -(@soc-big-y * @soc-tw); }
+            }   
+        }
+
+        &.cc-float {
+            input,
+            label {
+                width: auto;
+                display: inline;
+                vertical-align: baseline;
+                margin-top: 2em;
+            }
         }
     }
     .col-3 {
