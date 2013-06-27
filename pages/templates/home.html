@@ -5,11 +5,13 @@
 
     <article id="feature" class="column-text">
         <h1 class="stretch">{{ feature.title|default:"Missing Content :(" }}</h1>
-        {% if feature.img.src %}
+        {% if feature.photo %}
             <img
-                src="{{ MEDIA_URL }}{{ feature.img.src }}"
-                alt="{{ feature.img.alt }}"
-                title="{{ feature.img.title }}"
+                src="{{ feature.photo.url }}"
+                width="{{ feature.photo.width }}"
+                height="{{ feature.photo.height }}"
+                alt="{{ feature.photo_alt }}"
+                title="{{ feature.photo_title }}"
             />
         {% endif %}
         {{ feature.content|linebreaks }}

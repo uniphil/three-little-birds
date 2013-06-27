@@ -4,59 +4,42 @@
 {% block content %}
 <div id="contact" class="standard">
 
-    <div class="cols-12">
+    <div class="col-1">
+        <h1 class="stretch">Contact Us</h1>
+        <p>
+            Write us a note and we'll get back to you soon!<br/>
+            You can also contact us at <a href="mailto:info@threelittlebirdstheband.com">info@threelittlebirdstheband.com</a>
+        </p>
         <form method="post" action="{% url contact %}">
             {% csrf_token %}
-            <div class="col-1">
-                <h1 class="stretch">Contact Us</h1>
-                <p>
-                    Send us a message and we'll get back to you soon!<br/>
-                    You can also contact us at <a href="mailto:person@example.com">us@example.com</a>
-                </p>
-                <label for="name" class="visuallyhidden">Name</label>
-                {{ form.name.errors }}
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Name"
-                    value="{{ form.data.name }}"
-                    tabindex="1"
-                />
-            </div>
-            <div class="col-2 social">
-                <span class="social-shortcuts">
-                    <a href="https://www.facebook.com/threelittlebirdstheband" title="facebook" class="facebook">facebook</a>
-                    <a href="https://myspace.com/threelittlebirdstheband" title="myspace" class="myspace">myspace</a>
-                    <a href="https://twitter.com/TLBtheband" title="twitter" class="twitter">twitter</a>
-                </span>
-            </div>
-            <div class="clearfix"></div>
-
-            <div class="col-1">
-                <label for="email" class="visuallyhidden">Email</label>
-                {{ form.email.errors }}
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value="{{ form.data.email }}"
-                    reqired="required"
-                    tabindex="2"
-                />
-            </div>
-            <div class="col-2 cc-float">
-                <input
-                    type="checkbox"
-                    id="cc"
-                    name="cc"
-                    tabindex="3"
-                />
-                <label for="cc">Send me a carbon copy</label>
-            </div>
-            <div class="clearfix"></div>
-
+            <label for="name" class="visuallyhidden">Name</label>
+            {{ form.name.errors }}
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Name"
+                value="{{ form.data.name }}"
+                tabindex="1"
+            />
+            <label for="email" class="visuallyhidden">Email</label>
+            {{ form.email.errors }}
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Email Address"
+                value="{{ form.data.email }}"
+                reqired="required"
+                tabindex="2"
+            />
+            <input
+                type="checkbox"
+                id="cc"
+                name="cc"
+                tabindex="3"
+            />
+            <label for="cc">Send me a carbon copy</label>
             {{ form.message.errors }}
             <textarea
                 id="message"
@@ -66,6 +49,29 @@
             >{{ form.data.message }}</textarea>
             <button type="submit">Send</button>
         </form>
+    </div>
+
+    <div class="col-2 social">
+        <span class="social-shortcuts">
+            <a href="https://www.facebook.com/threelittlebirdstheband" title="facebook" class="facebook">facebook</a>
+            <a href="https://myspace.com/threelittlebirdstheband" title="myspace" class="myspace">myspace</a>
+            <a href="https://twitter.com/TLBtheband" title="twitter" class="twitter">twitter</a>
+        </span>
+        <div class="newsletter">
+            <h2>Sign up for our newsletter</h2>
+            <form method="post" action="{% url contact %}">
+                {% csrf_token %}
+                <label for="nemail" class="visuallyhidden">Email</label>
+                <input
+                    type="email"
+                    name="nemail"
+                    id="nemail"
+                    placeholder="Your Email Address"
+                    value="{{ nlform.data.name }}"
+                />
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
     </div>
     <div class="col-3">
         <img

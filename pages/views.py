@@ -3,7 +3,7 @@ from functools import wraps
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.context import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
-from pages.models import Feature, Poster, Track, Biography, GalleryPhoto
+from pages.models import Feature, Poster, Track, Biography, GalleryPhoto, Press
 from pages.forms import ContactForm
 
 
@@ -59,7 +59,7 @@ def bio(nav, request):
 
 @selectable
 def gallery(nav, request):
-    gallery = GalleryPhoto.objects.all()
+    gallery = GalleryPhoto.objects.all().order_by('weight')
     context = RequestContext(request, {
         'gallery': gallery,
         'nav': nav,
@@ -79,7 +79,14 @@ def galleryphoto(nav, request, photo_id):
 
 @selectable
 def media(nav, request):
+    press = Press.objects.all()
+    bad = press.filter(bad_press=True)
+    good = press.exclude(bad_press=True).filter(image="")
+    good_featured = press.exclude(bad_press=True).exclude(image="")
     context = RequestContext(request, {
+        'good_featured': good_featured,
+        'good': good,
+        'bad': bad,
         'nav': nav,
     })
     return render_to_response('media.html', context)
@@ -101,7 +108,7 @@ def contact(nav, request):
             name = form.cleaned_data['name']
             sender = form.cleaned_data['email'],
             data = {
-                'to': ['uniphil@gmail.com'],
+                'to': ['uniphil@gmail.com', 'info@threelittlebirdstheband.com'],
                 'from': sender,
                 'subject': '[TLB Contact Form] message from {}'.format(name),
                 'text': form.cleaned_data['message']

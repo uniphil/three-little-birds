@@ -39,6 +39,12 @@
                 fontactive: function(fontname) {
                     if (fontname === 'Serial Publication') {
                         $('.stretch').contents().stretch({min: 3, max: 300});
+                        var match = $('.match-stretch');
+                        if (match.length) {  // exists?
+                            var size = $('.stretch--resizer').css('font-size');
+                            console.log('setting to size' + size)
+                            match.css({'font-size': size});
+                        }
                     } else if (fontname === 'Minion') {
                         to_hyphenate = $('.column-text').addClass('hyphenate');
                         Hyphenator.run();

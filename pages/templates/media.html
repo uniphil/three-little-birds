@@ -2,6 +2,50 @@
 
 {% block content %}
 <div id="media"  class="standard">
-    <h1 class="stretch">Media is coming soon</h1>
+    <section class="good-news">
+        <h1 class="match-stretch">Good Press</h1>
+        <ul>
+            {% for item in good_featured %}
+                <li class="press">
+                    <a href="{{ item.link }}" title="{{ item.title }}">
+                        <h2>
+                            {% if item.image %}
+                                <img src="{{ item.image_thumb.url }}"
+                                     width="{{ item.image_thumb.width }}"
+                                     height="{{ item.image_thumb.height }}"
+                                     alt="{{ item.story }}"
+                                     title="{{ item.title }}" />
+                            {% else %}
+                                <p>uh..... ({{ item.publication }})</p>
+                            {% endif %}
+                        </h2>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="clearfix"></div>
+        <ul>
+            {% for item in good %}
+                <li class="press">
+                    <a href="{{ item.link }}" title="{{ item.title }}">
+                        <h2>{{ item.publication }}</h2>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section class="bad-news">
+        <h1 class="stretch">Bad Press</h1>
+        <ul>
+            {% for item in bad %}
+                <li class="press">
+                    <a href="{{ item.link }}" title="{{ item.title }}">
+                        <h2>{{ item.publication }}</h2>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+    <div class="clearfix"></div>
 </div>
 {% endblock %}

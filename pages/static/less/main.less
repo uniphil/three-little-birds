@@ -383,19 +383,61 @@ li {
     }
 }
 
+#media {
+    ul,
+    li {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    h2 {
+        font-size: 1.333em;
+    }
+
+    .good-news {
+        float: left;
+        width: (@column * 2 + @gutter * 2);
+        margin-right: -@gutter;
+
+        .match-stretch {
+            line-height: 1em;
+        }
+
+        li {
+            float: left;
+            width: @column;
+            margin: 0 @gutter @gutter 0;
+        }
+    }
+
+    .bad-news {
+        float: right;
+        width: @column;
+    }
+}
+
 
 #contact {
+    a:hover {
+        text-decoration: underline;
+    }
     h1 {
         margin-bottom: -(@u);
     }
 
-    input,
+    input[type="text"],
+    input[type="email"],
     textarea,
     button {
         margin: 0.5em 0;
         padding: 1em 1.5em 0.5em;
         box-sizing: border-box;
         font-family: inherit;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        width: @column;
     }
     input,
     textarea {
@@ -410,12 +452,8 @@ li {
             border-color: @black;
         }
     }
-    input {
-        width: @column;
-    }
     textarea {
-        width: (@column * 2 + @gutter);
-        height: (@gutter * 6);
+        height: (@gutter * 5);
     }
     button {
         margin: 0.333em 0 2em;
@@ -428,24 +466,21 @@ li {
         background: @black;
     }
 
-    .cols-12 {
-        width: (@column * 2 + @gutter);
-        float: left;
-    }
-
     .col-1 {
         width: @column;
         float: left;
+        margin-right: @gutter;
     }
     .col-2 {
         width: @column;
-        float: right;
+        float: left;
 
-        &.social {
-            margin: (@u * 12) 0 0;
+        .social-shortcuts {
+            // margin: (@u * 12) 0 0;
             padding: (@u * 4) 0;
-            text-align: right;
+            text-align: center;
             letter-spacing: (@u * 4);
+            border: 2px solid @black;
 
             a {
                 width: @soc-big-x;
