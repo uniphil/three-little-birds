@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"mailgu",
+				"mailgun_response"
+			],
+			[
+				"Gal",
+				"GalleryPhoto"
+			],
+			[
+				"Re",
+				"RequestContext"
+			],
+			[
 				"cur",
 				"current_track"
 			],
@@ -75,39 +87,15 @@
 			"file": "pages/static/less/main.less",
 			"settings":
 			{
-				"buffer_size": 6417,
+				"buffer_size": 10391,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "pages/static/coffee/player.coffee",
+			"file": "pages/templates/media.html",
 			"settings":
 			{
-				"buffer_size": 2871,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "tlb/settings.py",
-			"settings":
-			{
-				"buffer_size": 5829,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "pages/templates/home.html",
-			"settings":
-			{
-				"buffer_size": 2247,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "pages/templates/tlb_base.html",
-			"settings":
-			{
-				"buffer_size": 2073,
+				"buffer_size": 1810,
 				"line_ending": "Unix"
 			}
 		},
@@ -115,7 +103,66 @@
 			"file": "pages/templates/base.html",
 			"settings":
 			{
-				"buffer_size": 3069,
+				"buffer_size": 3687,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "pages/templates/bio.html",
+			"settings":
+			{
+				"buffer_size": 1210,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "pages/templates/home.html",
+			"settings":
+			{
+				"buffer_size": 2300,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "pages/templates/contact.html",
+			"settings":
+			{
+				"buffer_size": 2834,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "pages/templates/message_sent.html",
+			"settings":
+			{
+				"buffer_size": 181,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "pages/templates/tlb_base.html",
+			"settings":
+			{
+				"buffer_size": 2095,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "from django.db import models\nfrom imagekit.models import ImageSpecField\nfrom imagekit.processors import ResizeToFit, SmartResize, Adjust\n\n#from south.modelsinspector import add_introspection_rules\n#add_introspection_rules([], [\"^imagekit\\.models\\.ImageSpecField\"])\n\n\n# these numbers come from main.less\nONE_COL = 288\nTWO_COL = 616\nTRE_COL = 944\n\n\nclass Feature(models.Model):\n    \"\"\"Articles on the home page.\"\"\"\n\n    title = models.CharField(max_length=80)\n    featured = models.BooleanField(default=False)\n    photo = models.FileField(upload_to='three-little-birds/features/photos', blank=True)\n    photo_alt = models.CharField(max_length=80, blank=True)\n    photo_title = models.CharField(max_length=80, blank=True)\n    content = models.TextField()\n    more_link = models.SlugField(blank=True)\n    more_title = models.CharField(max_length=80, blank=True)\n\n    def inflate(self):\n        inflated = {\n            'title': self.title,\n            'img': {\n                'src': self.photo,\n                'alt': self.photo_alt,\n                'title': self.photo_title,\n            },\n            'content': self.content,\n        }\n        if self.more_link:\n            inflated['more'] = {\n                'href': self.more_link,\n                'title': self.more_title,\n            }\n        return inflated\n\n    def __unicode__(self):\n        return self.title\n\n\nclass Poster(models.Model):\n    \"\"\"Large photo on the home page.\"\"\"\n\n    featured = models.BooleanField(default=False)\n    photo = models.FileField(upload_to='three-little-birds/posters', blank=False)\n    alt_text = models.TextField()\n    tooltip = models.CharField(max_length=180, blank=False)\n    link_to = models.URLField(blank=True)\n\n    def __unicode__(self):\n        return self.tooltip\n\n\nclass Track(models.Model):\n    \"\"\"Music!\"\"\"\n\n    name = models.CharField(max_length=120)\n    featured = models.BooleanField(default=False)\n    mp3 = models.FileField(upload_to='three-little-birds/tracks/mp3', blank=True)\n    ogg = models.FileField(upload_to='three-little-birds/tracks/ogg', blank=True)\n    flac = models.FileField(upload_to='three-little-birds/tracks/flac', blank=True)\n    wav = models.FileField(upload_to='three-little-birds/tracks/wav', blank=True)\n\n    def inflate(self):\n        inflated = {\n            'name': self.name,\n            'formats': []\n        }\n        if self.mp3:\n            inflated['formats'].append({\n                'name': 'mp3',\n                'url': self.mp3\n            })\n        if self.ogg:\n            inflated['formats'].append({\n                'name': 'ogg vorbis',\n                'url': self.ogg\n            })\n        if self.flac:\n            inflated['formats'].append({\n                'name': 'lossless flacc',\n                'url': self.flac\n            })\n        if self.wav:\n            inflated['formats'].append({\n                'name': 'uncompressed wav',\n                'url': self.wav\n            })\n        return inflated\n\n    def __unicode__(self):\n        return self.name\n\n\nclass Biography(models.Model):\n    \"\"\"Stuff on the bio page.\"\"\"\n\n    title = models.CharField(max_length=80, default=\"Biography\")\n    content1 = models.TextField()\n    ad = models.FileField(upload_to='three-little-birds/bio-ads')\n    photo = models.FileField(upload_to='three-little-birds/bio-photos')\n    content2 = models.TextField()\n    instrumentation = models.TextField()\n    discography = models.TextField()\n\n    def __unicode__(self):\n        return self.title\n\n\nclass GalleryPhoto(models.Model):\n    \"\"\"Photos in the gallery\"\"\"\n\n    photo = models.FileField(upload_to='three-little-birds/gallery',\n                             blank=False)\n    web = ImageSpecField(source='photo',\n                         processors=[ResizeToFit(TRE_COL)],\n                         format='JPEG',\n                         options={'quality': 91})\n    thumbnail = ImageSpecField(source='photo',\n                               processors=[\n                                    Adjust(color=0.25),\n                                    SmartResize(288, 288),\n                               ],\n                               format='JPEG',\n                               options={'quality': 78})\n    caption = models.TextField()\n    weight = models.IntegerField(default=0, blank=False)\n\n    def __unicode__(self):\n        return '{}: {}'.format(self.weight, self.caption[:21])\n\n\nclass Press(models.Model):\n    \"\"\"What they're saying about TLB\"\"\"\n\n    publication = models.CharField(max_length=120, blank=False)\n    author = models.CharField(max_length=120, blank=True)\n    title = models.CharField(max_length=120, blank=True)\n    date = models.DateField(blank=True, null=True)\n    link = models.URLField(blank=True)\n    bad_press = models.BooleanField(default=False, blank=True)\n    story = models.TextField(blank=True)\n    image = models.ImageField(upload_to='three-little-birds/press-images', blank=True)\n    image_thumb = ImageSpecField(source='image',\n                                 processors=[\n                                    Adjust(color=0.25),\n                                    SmartResize(288, 288),\n                                 ],\n                                 format='JPEG',\n                                 options={'quality': 81})\n\n    def __unicode__(self):\n        return '{} {}: {}'.format(self.date, self.publication, self.title)\n",
+			"file": "pages/models.py",
+			"file_size": 5365,
+			"file_write_time": 1372188769000000,
+			"settings":
+			{
+				"buffer_size": 5367,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "pages/views.py",
+			"settings":
+			{
+				"buffer_size": 5127,
 				"line_ending": "Unix"
 			}
 		}
@@ -127,16 +174,16 @@
 		"selected_items":
 		[
 			[
+				"pci",
+				"Package Control: Install Package"
+			],
+			[
 				"pc",
 				"Package Control: Enable Package"
 			],
 			[
 				"pcl",
 				"Package Control: List Packages"
-			],
-			[
-				"pci",
-				"Package Control: Install Package"
 			],
 			[
 				"lint",
@@ -160,19 +207,34 @@
 	},
 	"file_history":
 	[
+		"/home/phil/Code/three-little-birds/pages/forms.py",
+		"/home/phil/Code/three-little-birds/pages/templates/gallery.html",
+		"/home/phil/Code/three-little-birds/pages/admin.py",
+		"/home/phil/Code/three-little-birds/pages/templates/gallery_photo.html",
 		"/home/phil/Code/three-little-birds/tlb/urls.py",
+		"/home/phil/Code/three-little-birds/pages/static/js/jquery.stretch.js",
+		"/home/phil/Code/nc14/phase0/robots.txt",
+		"/home/phil/Code/nc14/phase0/index.html",
+		"/home/phil/Code/three-little-birds/pages/templates/media.html",
+		"/home/phil/Code/three-little-birds/tlb/settings.py",
 		"/home/phil/Code/three-little-birds/pages/views.py",
+		"/home/phil/Code/three-little-birds/pages/static/less/main.less",
+		"/home/phil/Code/three-little-birds/pages/static/js/hyphenator.js",
+		"/tmp/xa-gEBtac/ca.js",
+		"/home/phil/Code/three-little-birds/pages/templates/store.html",
+		"/home/phil/Code/three-little-birds/pages/templates/bio.html",
+		"/home/phil/Code/three-little-birds/pages/templates/home.html",
+		"/home/phil/Code/three-little-birds/pages/static/coffee/player.coffee",
+		"/home/phil/Code/three-little-birds/pages/templates/base.html",
+		"/home/phil/.config/sublime-text-2/Packages/SideBarEnhancements/messages/11.13.2012.1305.0.txt",
 		"/home/phil/Downloads/jquery-ui-1.10.3.custom/css/no-theme/jquery-ui-1.10.3.custom.css",
 		"/home/phil/Code/three-little-birds/pages/models.py",
 		"/home/phil/Code/three-little-birds/pages/stupidflash/crossdomain.xml",
-		"/home/phil/Code/three-little-birds/pages/admin.py",
 		"/home/phil/Code/three-little-birds/pages/static/less/bp.less",
 		"/home/phil/Code/three-little-birds/pages/static/css/fonts.css",
 		"/home/phil/Code/three-little-birds/pages/static/coffee/main.coffee",
 		"/home/phil/Code/three-little-birds/pages/templates/heading-stretcher.coffee",
-		"/home/phil/Code/three-little-birds/pages/static/coffee/player.coffee",
 		"/tmp/xa-jYxLWh/minionpro-regular.css",
-		"/home/phil/Code/three-little-birds/pages/static/js/jquery.stretch.js",
 		"/home/phil/Code/three-little-birds/pages/static/js/textfill.js",
 		"/home/phil/Code/Courteau/gallery/fast_gallery/README.md",
 		"/home/phil/Code/YogaSite/public/stylesheets/mobile-override.css",
@@ -272,21 +334,7 @@
 		"/home/phil/Code/astro/nested",
 		"/home/phil/Code/astro/validators.py",
 		"/home/phil/Code/astro/widgets.py",
-		"/home/phil/Code/astro/__init__.py",
-		"/home/phil/Code/astro/Website/d3.v3.js",
-		"/home/phil/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
-		"/home/phil/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
-		"/home/phil/.icons/INSTALL",
-		"/home/phil/.icons/README",
-		"/home/phil/.config/gtk-3.0/settings.ini",
-		"/home/phil/.local/share/icons/F-Dark/index.theme",
-		"/home/phil/.local/share/themes/MediterraneanDarkest/gtk-3.0/settings.ini",
-		"/home/phil/Downloads/icons/fa/INSTALL",
-		"/home/phil/Code/darkchrometheme/manifest.json",
-		"/home/phil/.local/share/icons/elementary/index.theme",
-		"/home/phil/.icons/index.theme",
-		"/home/phil/Downloads/Faenza-Cupertino/index.theme",
-		"/home/phil/.themes/Týr himinn/cinnamon/cinnamon.css"
+		"/home/phil/Code/astro/__init__.py"
 	],
 	"find":
 	{
@@ -301,9 +349,48 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"bad",
+			"image_thumbnail",
+			"ection id=",
+			"News",
+			"print",
+			"func_or_selector",
+			"select",
+			"func_or_selector",
+			"nav_links",
+			", name='",
+			"\n    print nav",
+			"TRE_cOL",
+			"serial",
+			" class=\"\"",
+			"'),",
+			"','",
+			"},\n        '",
+			"{\n        '",
+			"(request):",
+			"bio",
+			"Bio",
+			"bio",
+			"Bio",
+			"bio",
+			"Bio",
+			"bio",
+			"Bio",
+			"bio",
+			"ly-hid",
+			"article",
+			"bio",
+			"line-height",
+			"track",
+			"div",
+			"db_track",
+			"track",
+			"db_feature",
+			"swf",
+			"soundman",
 			"offset",
 			"social",
 			"console",
@@ -392,46 +479,7 @@
 			"7",
 			"10",
 			"'",
-			"id",
-			"get",
-			"\"/",
-			"signup",
-			"h1",
-			"top",
-			"omming-soon",
-			"\"#\" class=\"button\"",
-			"64px",
-			"selected",
-			"class=\"ste",
-			"<a href",
-			"/static",
-			"p",
-			"div",
-			"ss=\"ste",
-			"lass=\"pa",
-			"61px",
-			"68px",
-			"72px",
-			"81px",
-			"360px",
-			"highlight",
-			"darken",
-			"lighten",
-			"light",
-			"50%",
-			"100",
-			"label",
-			"60",
-			"22",
-			"200",
-			"88",
-			"52",
-			"61",
-			"52",
-			"64",
-			"255",
-			"52",
-			"810px"
+			"id"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -449,7 +497,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 9,
 			"sheets":
 			[
 				{
@@ -457,15 +505,15 @@
 					"file": "pages/static/less/main.less",
 					"settings":
 					{
-						"buffer_size": 6417,
+						"buffer_size": 10391,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5524,
-								5524
+								7544,
+								7544
 							]
 						],
 						"settings":
@@ -564,25 +612,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3588.0,
+						"translation.y": 4836.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "pages/static/coffee/player.coffee",
+					"file": "pages/templates/media.html",
 					"settings":
 					{
-						"buffer_size": 2871,
+						"buffer_size": 1810,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1737,
-								1737
+								1057,
+								1057
 							]
 						],
 						"settings":
@@ -676,28 +724,30 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 741.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "tlb/settings.py",
+					"file": "pages/templates/base.html",
 					"settings":
 					{
-						"buffer_size": 5829,
+						"buffer_size": 3687,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4901,
-								4901
+								2540,
+								2540
 							]
 						],
 						"settings":
@@ -791,38 +841,30 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Python/Python.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1755.0,
+						"translation.y": 429.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "pages/templates/home.html",
+					"file": "pages/templates/bio.html",
 					"settings":
 					{
-						"buffer_size": 2247,
+						"buffer_size": 1210,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1941,
-								1941
-							],
-							[
-								2052,
-								2052
-							],
-							[
-								2149,
-								2149
+								139,
+								139
 							]
 						],
 						"settings":
@@ -928,18 +970,18 @@
 				},
 				{
 					"buffer": 4,
-					"file": "pages/templates/tlb_base.html",
+					"file": "pages/templates/home.html",
 					"settings":
 					{
-						"buffer_size": 2073,
+						"buffer_size": 2300,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1243,
-								1243
+								166,
+								166
 							]
 						],
 						"settings":
@@ -1045,18 +1087,18 @@
 				},
 				{
 					"buffer": 5,
-					"file": "pages/templates/base.html",
+					"file": "pages/templates/contact.html",
 					"settings":
 					{
-						"buffer_size": 3069,
+						"buffer_size": 2834,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1787,
-								1787
+								714,
+								714
 							]
 						],
 						"settings":
@@ -1159,6 +1201,472 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "pages/templates/message_sent.html",
+					"settings":
+					{
+						"buffer_size": 181,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								158,
+								158
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "pages/templates/tlb_base.html",
+					"settings":
+					{
+						"buffer_size": 2095,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								772,
+								772
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "pages/models.py",
+					"settings":
+					{
+						"buffer_size": 5367,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1548,
+								1548
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1287.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "pages/views.py",
+					"settings":
+					{
+						"buffer_size": 5127,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2549,
+								2549
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 845.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
 				}
 			]
 		}
@@ -1213,16 +1721,20 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"selected_items":
 		[
+			[
+				"",
+				"/home/phil/Code/nc14/phase0/phase0.sublime-project"
+			]
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"show_minimap": true,
-	"show_open_files": false,
+	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 111.0,
 	"status_bar_visible": true
 }
