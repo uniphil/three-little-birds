@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template.context import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from pages.models import Feature, Poster, Track, Biography, GalleryPhoto, Press
-from pages.forms import ContactForm
+from pages.forms import ContactForm, NewsletterForm, FormError
 
 
 NAV = (
@@ -103,31 +103,21 @@ def store(nav, request):
 @selectable
 def contact(nav, request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            sender = form.cleaned_data['email'],
-            data = {
-                'to': ['uniphil@gmail.com', 'info@threelittlebirdstheband.com'],
-                'from': sender,
-                'subject': '[TLB Contact Form] message from {}'.format(name),
-                'text': form.cleaned_data['message']
-            }
-            if form.cleaned_data['cc']:
-                data['cc'] = sender
-
-            # SEND THAT SHIT
-            import os, requests
-            mailgun_response = requests.post(
-                "https://api.mailgun.net/v2/threelittlebirds.mailgun.org/messages",
-                auth=('api', os.environ.get('MAILGUN_API_KEY')),
-                data=data,
-            )
-            if mailgun_response.status_code != 200:
-                return HttpResponse('uh oh, {} {}'.format(mailgun_response.status_code, mailgun_response.text))
-            return HttpResponseRedirect('/message-sent')
+        try:
+            if request.POST.get('form') == 'contact':
+                form = ContactForm(request.POST)
+                form.send()
+                return HttpResponseRedirect('/message-sent')
+            elif request.POST.get('form') == 'newsletter':
+                form = NewsletterForm(request.POST)
+                form.subscribe()
+                return HttpResponseRedirect('/subscribed')
+            else:
+                form = ContactForm()
+        except FormError:
+           form = ContactForm()
     else:
-        form = ContactForm()
+        form = ContactForm()  # actually arbitrary?
 
     context = RequestContext(request, {
         'nav': nav,
@@ -141,6 +131,14 @@ def sent(nav, request):
         'nav': nav,
     })
     return render_to_response('message_sent.html', context)
+
+@selectable(select='contact')
+def subd(nav, request):
+    context = RequestContext(request, {
+        'nav': nav,
+    })
+    return render_to_response('subscribed.html', context)
+
 
 
 ## stupid stuff

@@ -425,6 +425,10 @@ li {
         margin-bottom: -(@u);
     }
 
+    .errorlist {
+        color: #960;
+    }
+
     input[type="text"],
     input[type="email"],
     textarea,
@@ -477,6 +481,7 @@ li {
 
         .social-shortcuts {
             // margin: (@u * 12) 0 0;
+            display: block;
             padding: (@u * 4) 0;
             text-align: center;
             letter-spacing: (@u * 4);
@@ -492,14 +497,11 @@ li {
             }   
         }
 
-        &.cc-float {
-            input,
-            label {
-                width: auto;
-                display: inline;
-                vertical-align: baseline;
-                margin-top: 2em;
-            }
+        h2 {
+            margin-top: (@u * 5);
+        }
+        input {
+            margin-top: 0;
         }
     }
     .col-3 {
