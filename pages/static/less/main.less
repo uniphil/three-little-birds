@@ -36,7 +36,14 @@ html {
 body {
     font-size: 4 * @u;
     font-family: 'Minion';
-    background: @paper-colour url('../../img/boilerplate/paper.jpg') 50%;
+    background: #444 url('../../img/boilerplate/tweed.png');
+}
+
+#paper-bg {
+    width: 1000px;
+    margin: (4 * @u) auto;
+    background: @paper-colour url('../../img/boilerplate/paper.jpg') 50% top;
+    box-shadow: 0 @u (4 * @u) rgba(0, 0, 0, 0.4);
 }
 
 a {
