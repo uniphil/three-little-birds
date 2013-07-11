@@ -127,38 +127,32 @@ li {
     line-height: 1em;
     border: @u solid @black;
     border-width: @hr-thick 0;
+    text-align: center;
 
     ul {
-        text-align: center;
-        word-spacing: 8px;
+        display: inline-block;
         li {
             margin: 0;
-            display: inline;
+            display: block;
+            float: left;
             font-family: 'Fucking';
             letter-spacing: 2px;
+            border: @hr-thick solid @black;
+            border-width: 0 @hr-thick 0 0;
+            &:first-child {
+                border-left-width: @hr-thick;
+            }
 
             a {
-                // display: inline-block;
-                // padding: 0 (6 * @u);
+                display: block;
+                padding: 0 (5 * @u);
                 font-size: 4 * @u;
-                // border: @u solid @black;
-                // border-width: 0 @hr-thick 0 0;
                 text-transform: uppercase;
-
-                &:after {
-                    content: " | ";
-                }
 
                 &.selected {
                     font-weight: bold;
                     font-weight: 900;
                     letter-spacing: 0px;
-                }
-            }
-            &:first-child a {
-                // border-left-width: @hr-thick;
-                &:before {
-                    content: " | ";
                 }
             }
         }
