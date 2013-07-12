@@ -3,7 +3,7 @@ from functools import wraps
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.context import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
-from django.views.decorators import cache_page
+from django.views.decorators.cache import cache_page
 from pages.models import Feature, Poster, Track, Biography, GalleryPhoto, Press
 from pages.forms import ContactForm, NewsletterForm, FormError
 
