@@ -3,8 +3,12 @@ from functools import wraps
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.context import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
+from django.core.cache import cache
 from pages.models import Feature, Poster, Track, Biography, GalleryPhoto, Press
 from pages.forms import ContactForm, NewsletterForm, FormError
+
+
+CACHE_PAGE_TIME = 60 * 60
 
 
 NAV = (
@@ -33,6 +37,7 @@ def selectable(select):
         return wrap_with_nav(nav, select)
 
 
+@cache_page(CACHE_PAGE_TIME)
 @selectable
 def home(nav, request):
     feature = Feature.objects.get(featured=True).inflate()
@@ -46,7 +51,7 @@ def home(nav, request):
     })
     return render_to_response('home.html', context)
 
-
+@cache_page(CACHE_PAGE_TIME)
 @selectable
 def bio(nav, request):
     bio = Biography.objects.get()
@@ -56,7 +61,7 @@ def bio(nav, request):
     })
     return render_to_response('bio.html', context)
 
-
+@cache_page(CACHE_PAGE_TIME)
 @selectable
 def gallery(nav, request):
     gallery = GalleryPhoto.objects.all().order_by('weight')
@@ -66,7 +71,7 @@ def gallery(nav, request):
     })
     return render_to_response('gallery.html', context)
 
-
+@cache_page(CACHE_PAGE_TIME)
 @selectable(select='gallery')
 def galleryphoto(nav, request, photo_id):
     photo = get_object_or_404(GalleryPhoto, pk=photo_id)
@@ -76,7 +81,7 @@ def galleryphoto(nav, request, photo_id):
     })
     return render_to_response('gallery_photo.html', context)
 
-
+@cache_page(CACHE_PAGE_TIME)
 @selectable
 def media(nav, request):
     press = Press.objects.all()
@@ -91,7 +96,7 @@ def media(nav, request):
     })
     return render_to_response('media.html', context)
 
-
+@cache_page(CACHE_PAGE_TIME)
 @selectable
 def store(nav, request):
     context = RequestContext(request, {
@@ -99,7 +104,7 @@ def store(nav, request):
     })
     return render_to_response('store.html', context)
 
-
+@cache_page(CACHE_PAGE_TIME)
 @selectable
 def contact(nav, request):
     if request.method == 'POST':
@@ -124,14 +129,14 @@ def contact(nav, request):
         'form': form,
     })
     return render_to_response('contact.html', context)
-
+@cache_page(CACHE_PAGE_TIME)
 @selectable(select='contact')
 def sent(nav, request):
     context = RequestContext(request, {
         'nav': nav,
     })
     return render_to_response('message_sent.html', context)
-
+@cache_page(CACHE_PAGE_TIME)
 @selectable(select='contact')
 def subd(nav, request):
     context = RequestContext(request, {

@@ -48,7 +48,8 @@ and here's what to set with heroku config:add
 new PATH is /app/bin:/app/.heroku/python/bin:/usr/local/bin:/usr/bin:/bin
 new PYTHONPATH is /app:/app/lib/python2.7/site-packages:/app/lib/python2.7:/app/lib
 
-
+for memcached lib:
+heroku config:add LD_LIBRARY_PATH=/app/.heroku/vendor/lib
 
 
 S3
