@@ -1,6 +1,7 @@
 # Django settings for tlb project.
 import os
 import dj_database_url
+from memcacheify import memcacheify
 local_path = lambda *p: os.path.join(os.getcwd(), *p)
 
 DEBUG = (os.environ.get('DEBUG') != 'False')
@@ -175,3 +176,5 @@ COMPRESS_PRECOMPILERS = (
 )
 
 MAILCHIMP_API_KEY = '6cf35c39765fb30d3e2d19fab40658bc-us4'
+
+CACHES = memcacheify(timeout=60 * 60 * 72)
