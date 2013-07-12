@@ -16,5 +16,5 @@ django-imagekit==3.0.1
 pilkit==0.3.0
 requests==1.2.3
 PIL==1.1.7
-pylibmc==1.2.2
+pylibmc==1.2.3
 django-pylibmc-sasl==0.2.4
