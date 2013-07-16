@@ -18,6 +18,7 @@
         <script src="{% static 'js/modernizr-2.6.2.min.js' %}"></script>
     </head>
     <body>
+        <script type="text/javascript">window.is_mobile = screen.width < 500;</script>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -56,6 +57,7 @@
             <script type="text/javascript" src="{% static 'js/sm2/soundmanager2.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/jquery-ui.slider.min.js' %}"></script>
             <script type="text/coffeescript" src="{% static 'coffee/player.coffee' %}"></script>
+            <script type="text/coffeescript" src="{% static 'coffee/mobile-check.coffee' %}"></script>
         {% endcompress %}
         <script>
             var _gaq=[['_setAccount','UA-1110199-20'],['_trackPageview']];

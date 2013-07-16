@@ -72,6 +72,40 @@ li {
     line-height: 1em;
 }
 
+
+.go-mobile {
+    font-family: sans-serif;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: (@u * 46);
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    text-align: center;
+    font-size: (@u * 6);
+    p {
+        margin: 0.5em 0;
+        text-shadow: 0 0 (2 * @u) rgba(0, 0, 0, 1);
+    }
+
+    a {
+        background: #555;
+        font-size: 0.5em;
+        display: inline-block;
+        height: 2em;
+        line-height: 2em;
+        text-transform: uppercase;
+        vertical-align: middle;
+        padding: 0 1em;
+        border: 1px solid #000;
+        font-weight: bold;
+    }
+}
+
+
 #content h1 {
     font-family: 'Serial Publication';
     font-size: 10 * @u;
