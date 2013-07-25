@@ -18,7 +18,7 @@ class ContactForm(forms.Form):
             name = self.cleaned_data['name']
             sender = self.cleaned_data['email'],
             data = {
-                'to': ['uniphil@gmail.com', 'info@threelittlebirdstheband.com'],
+                'to': ['info@threelittlebirdstheband.com'],
                 'from': sender,
                 'subject': '[TLB Contact Form] message from {}'.format(name),
                 'text': self.cleaned_data['message']
