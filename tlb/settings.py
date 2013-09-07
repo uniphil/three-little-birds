@@ -192,4 +192,4 @@ COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
 
-MAILCHIMP_API_KEY = '6cf35c39765fb30d3e2d19fab40658bc-us4'
+MAILCHIMP_API_KEY = os.environ.get('MAILCHIMP_API_KEY', '')
